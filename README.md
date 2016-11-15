@@ -1,4 +1,4 @@
-# Add(ons for [BlogoText]()
+# Addons for [BlogoText]()
 
 [![Build Status](https://travis-ci.org/BoboTiG/blogotext-addons.svg?branch=master)](https://travis-ci.org/BoboTiG/blogotext-addons)
 
