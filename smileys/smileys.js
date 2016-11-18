@@ -5,8 +5,8 @@
 
 // regexp and replacement
 var strtostr= [
-    [/:\)/g,'😊'], 
-    [/:\(/g,'😞'], 
+    [/:\)/g,'😊'],
+    [/:\(/g,'😞'],
     [/:D/g,'😃'],
     [/:S/g,'😖'],
     [/:s/g,'😖'],
@@ -27,10 +27,10 @@ var strtostr= [
 var classes_to_replace = ["com-content", "art-content", "post-content"];
 
 // regexp to find tags (no replacement in <pre> and <code>
-var htmlTagRegex =/(<[^>]*>)/g     
+var htmlTagRegex =/(<[^>]*>)/g
 
 // loop in classes
-classes_to_replace.forEach(function(class_){
+classes_to_replace.forEach(function (class_) {
     var tochange = document.getElementsByClassName(class_);
     var codecnt = 0;
 
@@ -43,16 +43,16 @@ classes_to_replace.forEach(function(class_){
         var divtxt = "";
         var tagcnt;
         for (tagcnt = 0; tagcnt < tagArray.length; tagcnt++) {
-            t = tagArray[tagcnt]; 
+            t = tagArray[tagcnt];
             console.log(t);
             if (t.toLowerCase() == "<pre>" || t == "<code>") {
                 codecnt++;
-            }
+            } 
             else if (t.toLowerCase() == "</pre>" || t == "</code>") {
                 codecnt--;
             }
         
-            if(codecnt == 0){
+            if (codecnt == 0) {
                 var i;
                 var newtxt = "";
                 for (i = 0; i < strtostr.length; i++) {
