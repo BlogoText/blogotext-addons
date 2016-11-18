@@ -3,7 +3,6 @@
 // Licence MIT
 
 
-// regexp and replacement
 var strtostr= [
     [/(\s|&nbsp;):\)/g,' 😊'],
     [/(\s|&nbsp;):\(/g,' 😞'],
