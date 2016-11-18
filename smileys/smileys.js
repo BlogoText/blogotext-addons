@@ -47,8 +47,7 @@ classes_to_replace.forEach(function (class_) {
             console.log(t);
             if (t.toLowerCase() == "<pre>" || t == "<code>") {
                 codecnt++;
-            } 
-            else if (t.toLowerCase() == "</pre>" || t == "</code>") {
+            } else if (t.toLowerCase() == "</pre>" || t == "</code>") {
                 codecnt--;
             }
         
