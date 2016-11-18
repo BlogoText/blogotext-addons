@@ -2,7 +2,7 @@
 $GLOBALS['addons'][] = array(
     'tag' => 'smileys',
     'name' => array(
-        'en' => 'smileys',
+        'en' => 'Smileys',
         'fr' => 'Émoticônes',
     ),
     'desc' => array(
