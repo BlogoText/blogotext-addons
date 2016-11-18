@@ -2,7 +2,7 @@
 // 2016, thuban, <thuban@yeuxdelibad.net>
 // Licence MIT
 
-
+// Edit this array with regex you like
 var strtostr= [
     [/(\s|&nbsp;):\)/g,' 😊'],
     [/(\s|&nbsp;):\(/g,' 😞'],
@@ -43,7 +43,6 @@ classes_to_replace.forEach(function (class_) {
         var tagcnt;
         for (tagcnt = 0; tagcnt < tagArray.length; tagcnt++) {
             t = tagArray[tagcnt];
-            console.log(t);
             if (t.toLowerCase() == "<pre>" || t == "<code>") {
                 codecnt++;
             } else if (t.toLowerCase() == "</pre>" || t == "</code>") {
