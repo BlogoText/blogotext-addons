@@ -16,10 +16,5 @@ $GLOBALS['addons'][] = array(
     ),
     'url' => 'http://yeuxdelibad.net',
     'version' => '1.0.0',
+    'js' => 'smileys.js',
 );
-
-function addon_smileys()
-{
-    $html="<script src='addons/smileys/smileys.js'></script>";
-    return $html;
-}
