@@ -1,0 +1,11 @@
+#addon_plugin_example {
+    text-align: center;
+}
+
+#addon_plugin_example .true{
+    color: green;
+}
+
+#addon_plugin_example .false{
+    color: red;
+}
