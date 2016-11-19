@@ -28,7 +28,7 @@ var classes_to_replace = ["com-content", "art-content", "post-content"];
 // regexp to find tags (no replacement in <pre> and <code>)
 var htmlTagRegex =/(<[^>]*>)/g
 
-function convert_smileys() 
+function convert_smileys()
 {
     "use strict";
 
