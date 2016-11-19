@@ -2,8 +2,6 @@
 // 2016, thuban, <thuban@yeuxdelibad.net>
 // Licence MIT
 
-"use strict";
-
 // Edit this array with regex you like
 var strtostr= [
     [/(\s|&nbsp;):\)/g,' 😊'],
@@ -32,6 +30,8 @@ var htmlTagRegex =/(<[^>]*>)/g
 
 function convert_smileys() 
 {
+    "use strict";
+
     // loop in classes
     classes_to_replace.forEach(function (class_) {
         var tochange = document.getElementsByClassName(class_);
