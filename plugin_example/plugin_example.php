@@ -128,6 +128,24 @@ $GLOBALS['addons'][] = array(
             ),
             'value' => 'There is an exemple.',
         ),
+        'exemple_config_4' => array(
+            'type' => 'select',
+            'label' => array(
+                'en' => 'label for select',
+                'fr' => 'label pour select'
+            ),
+            'options' => array(
+                'value1' => array(
+                                'fr' => 'texte pour la valeur 1',
+                                'en' => 'text for value 1',
+                            ),
+                'value2' => array(
+                                'fr' => 'texte pour la valeur 2',
+                                'en' => 'text for value 2',
+                            ),
+            ),
+            'value' => 'value2' // default value
+        ),
     ),
 
     /**
