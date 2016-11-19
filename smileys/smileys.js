@@ -2,6 +2,8 @@
 // 2016, thuban, <thuban@yeuxdelibad.net>
 // Licence MIT
 
+"use strict";
+
 // Edit this array with regex you like
 var strtostr= [
     [/(\s|&nbsp;):\)/g,' 😊'],
@@ -25,39 +27,45 @@ var strtostr= [
 // class div where regexp will be applied
 var classes_to_replace = ["com-content", "art-content", "post-content"];
 
-// regexp to find tags (no replacement in <pre> and <code>
+// regexp to find tags (no replacement in <pre> and <code>)
 var htmlTagRegex =/(<[^>]*>)/g
 
-// loop in classes
-classes_to_replace.forEach(function (class_) {
-    var tochange = document.getElementsByClassName(class_);
-    var codecnt = 0;
+function convert_smileys() {
+    // loop in classes
+    classes_to_replace.forEach(function (class_) {
+        var tochange = document.getElementsByClassName(class_);
+        var codecnt = 0;
 
-    var classcnt;
-    for (classcnt = 0; classcnt < tochange.length; classcnt++) {
-        div = tochange[classcnt]
+        var classcnt = 0;
+        var div = "";
+        for (classcnt = 0; classcnt < tochange.length; classcnt++) {
+            div = tochange[classcnt]
 
-        // check if in <code> or <pre>
-        var tagArray = div.innerHTML.split(htmlTagRegex);
-        var divtxt = "";
-        var tagcnt;
-        for (tagcnt = 0; tagcnt < tagArray.length; tagcnt++) {
-            t = tagArray[tagcnt];
-            if (t.toLowerCase() == "<pre>" || t == "<code>") {
-                codecnt++;
-            } else if (t.toLowerCase() == "</pre>" || t == "</code>") {
-                codecnt--;
-            }
-        
-            if (codecnt == 0) {
-                var i;
-                var newtxt = "";
-                for (i = 0; i < strtostr.length; i++) {
-                    t = t.replace(strtostr[i][0],strtostr[i][1]);
+            // check if in <code> or <pre>
+            var tagArray = div.innerHTML.split(htmlTagRegex);
+            var divtxt = "";
+            var tagcnt = 0;
+            var t = "";
+            for (tagcnt = 0; tagcnt < tagArray.length; tagcnt++) {
+                t = tagArray[tagcnt];
+                if (t.toLowerCase() == "<pre>" || t == "<code>") {
+                    codecnt++;
+                } else if (t.toLowerCase() == "</pre>" || t == "</code>") {
+                    codecnt--;
                 }
+            
+                if (codecnt == 0) {
+                    var i;
+                    var newtxt = "";
+                    for (i = 0; i < strtostr.length; i++) {
+                        t = t.replace(strtostr[i][0],strtostr[i][1]);
+                    }
+                }
+                divtxt += t;
             }
-            divtxt += t;
+            div.innerHTML = divtxt;
         }
-        div.innerHTML = divtxt;
-    }
-});
+    });
+}
+
+window.addEventListener('load', convert_smileys, false);
