@@ -1,12 +1,7 @@
 <?php
 # *** LICENSE ***
 # This file is a addon for BlogoText.
-# http://lehollandaisvolant.net/blogotext/
-#
-# 2016 Timo Van Neerden.
-#
 # You can redistribute it under the terms of the MIT / X11 Licence.
-#
 # *** LICENSE ***
 
 $GLOBALS['addons'][] = array(
