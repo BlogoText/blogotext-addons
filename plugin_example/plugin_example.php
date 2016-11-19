@@ -139,9 +139,32 @@ $GLOBALS['addons'][] = array(
      *    'css' => array('style1.css', 'style2.css')
      */
     'css' => 'style.css',
+
+    /**
+     * optional, define your own script
+     * js file(s) must be in /addons/{your addon}/
+     * 'js' can be a string :
+     *    'js' => 'example.js'
+     * 'js' can be an array :
+     *    'js' => array('script1.js', 'script2.js')
+     */
+    //'js' => 'script.js',
 );
 
-// your basic plugin function
+/*
+ * You must declare the callback function as follow:
+ *     function addon_${addon tag}() { ... }
+ *
+ * Note: if your addon contains only CSS/JS files, no need to define such a function.
+ *
+ * The function has to return valid HTML data.
+ * In this addon, it returns a HTML <table> calendar.
+ *
+ * If you need more functions, you can declare how many as needed below this one.
+ * You should suffix theme with an underscore.
+ *
+ * You can use BlogoText function and defines.
+ */
 function addon_plugin_example()
 {
     // get the addon conf (if you need)

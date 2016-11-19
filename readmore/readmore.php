@@ -16,7 +16,6 @@ $GLOBALS['addons'][] = array(
     'version' => '1.0.0',
 );
 
-// returns HTML <table> calender
 function addon_readmore()
 {
     $nb_art = 3;

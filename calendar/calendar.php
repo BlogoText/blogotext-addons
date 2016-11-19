@@ -9,65 +9,6 @@
 #
 # *** LICENSE ***
 
-/*
- * =================================================================================
- *
- * /!\ PLEASE READ THIS BEFORE WRITING YOUR OWN ADDONS /!\
- *
- * 1. You can use this official addon to see how it works and get inspired.
- *
- * 2. Ideally, write all in english.
- *
- * 3. Before spreading the world with your addon, make sure it is PSR-2 compliant.
- *    You can download this useful tool to help you:
- *        $ curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
- *        $ php phpcs.phar --standard=PSR2 -n --colors "<path to the addon>/<addon>.php"
- *
- *        Example with this addon:
- *        $ php phpcs.phar --standard=PSR2 -n --colors addons/calendar/calendar.php
- *
- *    Source of the tool: https://github.com/squizlabs/PHP_CodeSniffer
- *
- * That's it! Enjoy and good luck :)
- *
- * =================================================================================
- */
-
-/*
- * First, you must add a new entry to the global $addons.
- * Keywords accepted:
- *
- * 'tag' => 'calendar'
- * (required)
- * This is the addon ID. It must have the same name of this file without ".php".
- * The directory tree has to be "${addon ID}/${addon ID}.php".
- *
- * 'name' => 'Calendar'
- * (required)
- * This is the displayed name into back office. You can add translations using an associative array.
- *
- * 'desc' => 'Display a navigable HTML calendar.'
- * (required)
- * This is the addon description. You can add translations using an associative array.
- *
- * 'version' => '1.0.0'
- * (required)
- * Addon version that should follow the SemVer notation: http://semver.org/.
- *
- * 'url' => 'http://example.org/bt-addons/calendar'
- * (optional but highly recommended)
- * Addon developer website, for addon support.
- *
- * 'css' => 'style.css'
- * 'css' => array('style1.css', 'style1.css')
- * (optional)
- * CSS files to include. You can specifiy several files using an array of filenames.
- *
- * 'js' => 'script.js'
- * 'js' => array('script1.js', 'script.js')
- * (optional)
- * JS files to include. You can specifiy several files using an array of filenames.
- */
 $GLOBALS['addons'][] = array(
     'tag' => 'calendar',
     'name' => array(
@@ -83,20 +24,6 @@ $GLOBALS['addons'][] = array(
     'css' => 'style.css',
 );
 
-/*
- * Second and last, you must declare the callback function as follow:
- *     function addon_${addon ID}() { ... }
- *
- * Note: if your addon contains only CSS/JS files, no need to define such a function.
- *
- * The function has to return valid HTML data.
- * In this addon, it returns a HTML <table> calendar.
- *
- * If you need more functions, you can declare how many as needed below this one.
- * You should suffix theme with an underscore.
- *
- * You can use BlogoText function and defines.
- */
 function addon_calendar()
 {
     // Get post ID
