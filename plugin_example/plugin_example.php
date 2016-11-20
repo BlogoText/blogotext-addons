@@ -91,7 +91,7 @@ $GLOBALS['addons'][] = array(
     ),
 
     // the version, showed in admin/addon (required)
-    'version' => '1.0.0',
+    'version' => '1.0.1',
 
     // if your plugin allow user (admin) to change some params
     'config' => array(
@@ -122,6 +122,24 @@ $GLOBALS['addons'][] = array(
             ),
             'value' => 'There is an exemple.',
         ),
+        'exemple_config_4' => array(
+            'type' => 'select',
+            'label' => array(
+                'en' => 'label for select',
+                'fr' => 'label pour select'
+            ),
+            'options' => array(
+                'value1' => array(
+                                'fr' => 'texte pour la valeur 1',
+                                'en' => 'text for value 1',
+                            ),
+                'value2' => array(
+                                'fr' => 'texte pour la valeur 2',
+                                'en' => 'text for value 2',
+                            ),
+            ),
+            'value' => 'value2' // default value
+        ),
     ),
 
     /**
@@ -143,6 +161,12 @@ $GLOBALS['addons'][] = array(
      *    'js' => array('script1.js', 'script2.js')
      */
     //'js' => 'script.js',
+
+    /**
+     * optional but highly recommended
+     * Addon developer website, for addon support.
+     */
+    'url' => 'http://example.org/bt-addons/plugin_example'
 );
 
 /*
