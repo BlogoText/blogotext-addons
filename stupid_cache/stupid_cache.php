@@ -68,7 +68,7 @@ hook_push('system-start', 'addon_stupid_cache_at_start', 100);
 function addon_stupid_cache_at_start()
 {
     // don't want use cache ?
-    if (isset($_GET['no-stupid-cache'])){
+    if (isset($_GET['no-stupid-cache'])) {
         return true;
     }
 
@@ -87,14 +87,14 @@ function addon_stupid_cache_at_start()
 
 function addon_stupid_cache_get_from_cache($path)
 {
-    if (!file_exists($path)){
+    if (!file_exists($path)) {
         return false;
     }
     if ((time()-filemtime($path)) > 60) {
         return false;
     }
     $cached = file_get_contents($path);
-    if ($cached !== false){
+    if ($cached !== false) {
         global $begin;
         echo $cached;
         $end = microtime(true);
@@ -113,7 +113,7 @@ function addon_stupid_cache_put_url_in_cache($path)
         'http'=>array(
             'method'=>"GET",
             'header'=>"Accept-language: fr",
-            'timeout' => 1 
+            'timeout' => 1
         )
     );
 
