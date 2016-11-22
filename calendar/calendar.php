@@ -20,7 +20,7 @@ $GLOBALS['addons'][] = array(
 
 function addon_calendar()
 {
-    // 1. Get the post ID
+    // Get the post ID
     $date = date('Ym');
     $postId = (string)filter_input(INPUT_GET, 'd');
     if (preg_match('#^\d{4}(/\d{2}){5}#', $postId)) {
@@ -30,13 +30,9 @@ function addon_calendar()
     } elseif (preg_match('#^\d{4}/\d{2}(/\d{2})?#', $postId)) {
         $date = str_replace('/', '', $postId);
         $date = (preg_match('#^\d{6}\d{2}#', $date)) ? substr($date, 0, 8) : substr($date, 0, 6);
-    } else {
-        $postId = (string)filter_input(INPUT_GET, 'id');
-        if (preg_match('#^\d{14}#', $postId)) {
-            $date = substr($postId, 0, 8);
-        }
+    } elseif (preg_match('#^\d{14}#', $postId)) {
+        $date = substr($postId, 0, 8);
     }
-    //~ return;
 
     $year = substr($date, 0, 4);
     $thisMonth = substr($date, 4, 2);
