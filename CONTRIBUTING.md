@@ -1,1 +1,1 @@
-See https://github.com/BoboTiG/blogotext/blob/dev/CONTRIBUTING.md
+See https://github.com/BoboTiG/blogotext/wiki/Contributing
