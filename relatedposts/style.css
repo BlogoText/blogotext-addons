@@ -4,18 +4,21 @@
     border-top: 1px solid #ddd;
     padding: 1em;
 }
+
 .article .related-posts p {
     font-weight: 700;
 }
+
 .article .related-posts .category {
     color: #2196f3;
 }
+
 .article .related-posts ul {
     counter-reset: li;
     list-style: none;
 }
 
-.rectangle-list a {
+.article .related-posts a {
     position: relative;
     display: block;
     padding: .4em .4em .4em .8em;
@@ -26,10 +29,12 @@
     text-decoration: none;
     transition: all .3s ease-out;
 }
-.rectangle-list a:hover {
+
+.article .related-posts a:hover {
     background: #eee;
 }
-.rectangle-list a::before {
+
+.article .related-posts a::before {
     content: counter(li);
     counter-increment: li;
     position: absolute;
@@ -43,7 +48,8 @@
     text-align: center;
     font-weight: bold;
 }
-.rectangle-list a::after {
+
+.article .related-posts a::after {
     position: absolute;
     content: '';
     border: .5em solid transparent;
@@ -52,7 +58,8 @@
     margin-top: -.5em;
     transition: all .3s ease-out;
 }
-.rectangle-list a:hover::after {
+
+.article .related-posts a:hover::after {
     left: -.5em;
     border-left-color: #fa8072;
 }

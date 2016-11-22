@@ -102,7 +102,7 @@ function addon_relatedposts()
     $html .= '<p>';
         $html .= sprintf($conf['sentence']['value'], '<span class="category">'.htmlentities($tag).'</span>');
     $html .= '</p>';
-    $html .= '<ul class="rectangle-list">';
+    $html .= '<ul>';
     foreach ($relatedPosts as $post) {
         $decId = decode_id($post['bt_id']);
         $html .= '<li><a href="?d='.implode('/', $decId).'-'.titre_url($post['bt_title']).'">'.$post['bt_title'].'</a></li>';
