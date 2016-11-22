@@ -46,7 +46,8 @@ $GLOBALS['addons'][] = array(
 
 // Include the posts list.
 // To use in theme/$theme/post.html.
-function addon_relatedposts() {
+function addon_relatedposts()
+{
     $conf = addon_get_conf('relatedposts');
     $nb_posts = $conf['nb_posts']['value'];
 
