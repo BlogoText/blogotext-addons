@@ -1,20 +1,21 @@
-#calendrier {
+#calendar {
     margin: 0 auto;
 }
-#calendrier,
-#calendrier caption {
+
+#calendar,
+#calendar caption {
     background: rgba(0, 0, 0, .02);
 }
 
-#calendrier caption {
+#calendar caption {
     padding: 15px 0 20px;
 }
 
-#calendrier caption > a {
+#calendar caption > a {
     padding: 5px 10px;
 }
 
-#calendrier td {
+#calendar td {
     width: 30px;
     height: 30px;
     border-radius: 3px;
@@ -26,18 +27,18 @@
     position: relative;
 }
 
-#calendrier td a {
+#calendar td a {
     color: rgba(42, 42, 42, .8);
     display: inline-block;
     width: 100%;
     height: 100%;
 }
 
-#calendrier td a:hover {
+#calendar td a:hover {
     color: #000;
 }
 
-#calendrier td a::before {
+#calendar td a::before {
     content: "";
     background-color: #2196F3;
     position: absolute;

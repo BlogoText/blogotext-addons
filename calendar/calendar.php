@@ -73,7 +73,7 @@ function addon_calendar()
     $datesList = table_list_date_($year.$thisMonth, $where);
 
     // Calendar header
-    $html = '<table id="calendrier">'."\n";
+    $html = '<table id="calendar">'."\n";
     $html .= '<caption>';
     if ($previousPost !== null) {
         $html .= '<a href="'.$previousMonth.'">&#171;</a>&nbsp;';
