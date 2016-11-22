@@ -49,22 +49,17 @@ $GLOBALS['addons'][] = array(
 function addon_relatedposts()
 {
     $conf = addon_get_conf('relatedposts');
-    $nb_posts = $conf['nb_posts']['value'];
+    $nbPosts = $conf['nb_posts']['value'];
 
-    // 1. Get the article ID
-    $id_ = !empty($_GET['d']) ? $_GET['d'] : null;
-    if ($id_ === null) {
-        return '';
-    }
-    if (preg_match('#^\d{4}(/\d{2}){5}#', $id_)) {
-        $id = substr(str_replace('/', '', $_GET['d']), 0, 14) + 0;
-    } elseif (preg_match('#^\d{14}#', $id_)) {
-        $id = substr($_GET['id'], 0, 14) + 0;
-    } else {
-        return '';
+    // 1. Get the post ID
+    $postId = (string)filter_input(INPUT_GET, 'd');
+    if (preg_match('#^\d{4}(/\d{2}){5}#', $postId)) {
+        $postId = (int)substr(str_replace('/', '', $postId), 0, 14);
+    } elseif (preg_match('#^\d{14}#', $postId)) {
+        $postId = (int)substr($postId, 0, 14);
     }
 
-    // 2. Get article tags
+    // 2. Get post tags
     try {
         $sql = $GLOBALS['db_handle']->prepare(
             'SELECT bt_tags
@@ -72,24 +67,18 @@ function addon_relatedposts()
               WHERE bt_statut = 1
                     AND bt_id = :id'
         );
-        $sql->bindValue(':id', $id, SQLITE3_INTEGER);
+        $sql->bindValue(':id', $postId, SQLITE3_INTEGER);
         $sql->execute();
         $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $tags = current($tags);
     } catch (Exception $e) {
-        die('Error step 2 addon_relatedposts() : '.$e->getMessage());
-    }
-    if (!$tags) {
-        return '';
+        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error step 2 addon_relatedposts() : '.$e->getMessage() : '';
     }
 
     // 3. Find related posts based on a random tag from current article
-    $tags = current($tags);
     $tags = explode(', ', $tags['bt_tags']);
     shuffle($tags);
     $tag = current($tags);
-    if (!$tag) {
-        return '';
-    }
     try {
         $sql = $GLOBALS['db_handle']->prepare(
             'SELECT bt_id, bt_title
@@ -98,28 +87,25 @@ function addon_relatedposts()
                     AND bt_id != :id
                     AND bt_tags LIKE :tag'
         );
-        $sql->bindValue(':id', $id, SQLITE3_INTEGER);
+        $sql->bindValue(':id', $postId, SQLITE3_INTEGER);
         $sql->bindValue(':tag', '%'.$tag.'%');
         $sql->execute();
-        $related_posts = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $relatedPosts = $sql->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
-        die('Error step 3 addon_relatedposts() : '.$e->getMessage());
+        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error step 3 addon_relatedposts() : '.$e->getMessage() : '';
     }
-    if (!$related_posts) {
-        return '';
-    }
-    shuffle($related_posts);
-    $related_posts = array_slice($related_posts, 0, $nb_posts);
+    shuffle($relatedPosts);
+    $relatedPosts = array_slice($relatedPosts, 0, $nbPosts);
 
-    // 4. Generate the ul/li list
+    // 4. Generate the list
     $html = '<div class="related-posts">';
     $html .= '<p>';
         $html .= sprintf($conf['sentence']['value'], '<span class="category">'.htmlentities($tag).'</span>');
     $html .= '</p>';
     $html .= '<ul class="rectangle-list">';
-    foreach ($related_posts as $article) {
-        $dec_id = decode_id($article['bt_id']);
-        $html .= '<li><a href="?d='.implode('/', $dec_id).'-'.titre_url($article['bt_title']).'">'.$article['bt_title'].'</a></li>';
+    foreach ($relatedPosts as $post) {
+        $decId = decode_id($post['bt_id']);
+        $html .= '<li><a href="?d='.implode('/', $decId).'-'.titre_url($post['bt_title']).'">'.$post['bt_title'].'</a></li>';
     }
     $html .= '</ul>';
     $html .= '</div>';
