@@ -41,7 +41,7 @@
  *  - performance ;)
  */
 
-require_once BT_ROOT.DIR_ADDONS .'/light_seo/FlatDB.php';
+require_once DIR_ADDONS.'light_seo/FlatDB.php';
 
 $GLOBALS['addons'][] = array(
     'tag' => 'light_seo',
