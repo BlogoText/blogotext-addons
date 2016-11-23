@@ -1,5 +1,3 @@
-light_seo/cache/db-rewrite.json.gz.php
 *.ini
-stupid_cache/cache/201611/.htaccess
-stupid_cache/cache/201611/index.html
 *.html
+cache/
