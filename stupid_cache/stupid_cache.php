@@ -146,7 +146,7 @@ function addon_stupid_cache_put_url_in_cache($path)
         'http'=>array(
             'method' => "GET",
             'header' => "Accept-language: fr",
-            'timeout' => 1 
+            'timeout' => 1
         )
     );
 
