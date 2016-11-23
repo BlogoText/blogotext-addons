@@ -20,6 +20,16 @@
  * DO NO USE IN PROD !
  * REALLY !
  *
+ * 0.0.3
+ *  - Quelques modifications bien dégueulasses pour tester le PR#139 de BT
+ *    This IS POOOOCCCCC !
+ *
+ * 0.0.2
+ *  - put hook-push in $GLOBALS['addons'][]
+ *  - change $GLOBALS['addons'][]['configs'] to $GLOBALS['addons'][]['settings']
+ *  - use the new BlogoText fn addon_get_cache_path()
+ *  - swith the custom create dir script to the BlogoText fn create_folder()
+ *
  * 0.0.1
  *  - init
  *  - put in cache
@@ -38,45 +48,68 @@ $GLOBALS['addons'][] = array(
         'fr' => 'POC - Stupid Cache - ne pas utiliser en production ! - juste pour les articles',
     ),
     'url' => 'https://github.com/remrem/blogotext_light_seo',
-    'version' => '0.0.1',
+    'version' => '0.0.3',
 
-    'config' => array(
-                'cache_ttl' => array(
-                        'type' => 'int',
-                        'label' => array(
+    'settings' => array(
+            'cache_ttl' => array(
+                    'type' => 'int',
+                    'label' => array(
                             'en' => 'FYI - Cache TTL (in sec)',
                             'fr' => 'Pour votre information - Durée du cache (en sec)'
                         ),
-                        'value' => 60,
-                        'value_min' => 59,
-                        'value_max' => 61,
-                    ),
-            )
+                    'value' => 60,
+                    'value_min' => 59,
+                    'value_max' => 61,
+                ),
+        ),
+
+    'hook-push' => array(
+            'system-start' => array(
+                    'callback' => 'addon_stupid_cache_at_start',
+                    'priority' => 100
+                )
+        ),
+    'buttons' => array(
+            'hellow-world' => array(
+                    'callback' => 'addon_stupid_cache_hello',
+                    'label' => array(
+                            'en' => 'just a test',
+                            'fr' => 'juste un test'
+                        ),
+                    'desc' => array(
+                            'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
+                            'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
+                        ),
+                )
+        )
 );
 
 
 
 /**
- * set hooks
- */
-hook_push('system-start', 'addon_stupid_cache_at_start', 100);
-
-/**
  * functions
  */
+
+function addon_stupid_cache_hello()
+{
+    echo '<h1>Hello world!</h1>';
+}
 
 function addon_stupid_cache_at_start()
 {
     // don't want use cache ?
-    if (isset($_GET['no-stupid-cache'])) {
+    if (isset($_GET['no-stupid-cache'])){
         return true;
     }
+
+    echo '<h1>Ok : Started</h1>';
 
     // can be cached ?
     if (isset($_GET['d']) and preg_match('#^\d{4}/\d{2}/\d{2}/\d{2}/\d{2}/\d{2}#', $_GET['d'])) {
         $tab = explode('/', $_GET['d']);
         $id = substr($tab['0'].$tab['1'].$tab['2'].$tab['3'].$tab['4'].$tab['5'], '0', '14');
-        $path = BT_ROOT.DIR_ADDONS .'/stupid_cache/cache/'.$tab['0'].$tab['1'].'/'.$tab['2'].$tab['3'].$tab['4'].$tab['5'].'.cache.html';
+        $path = addon_get_cache_path('stupid_cache');
+        $path .= '/'.$tab['0'].$tab['1'].'/'.$tab['2'].$tab['3'].$tab['4'].$tab['5'].'.cache.html';
 
         addon_stupid_cache_get_from_cache($path);
         addon_stupid_cache_put_url_in_cache($path);
@@ -87,14 +120,14 @@ function addon_stupid_cache_at_start()
 
 function addon_stupid_cache_get_from_cache($path)
 {
-    if (!file_exists($path)) {
+    if (!file_exists($path)){
         return false;
     }
     if ((time()-filemtime($path)) > 60) {
         return false;
     }
     $cached = file_get_contents($path);
-    if ($cached !== false) {
+    if ($cached !== false){
         global $begin;
         echo $cached;
         $end = microtime(true);
@@ -113,7 +146,7 @@ function addon_stupid_cache_put_url_in_cache($path)
         'http'=>array(
             'method'=>"GET",
             'header'=>"Accept-language: fr",
-            'timeout' => 1
+            'timeout' => 1 
         )
     );
 
@@ -127,16 +160,9 @@ function addon_stupid_cache_put_url_in_cache($path)
     }
 
     $folder = dirname($path);
-    if (!is_dir($folder)) {
-        if (mkdir($folder, 0777, true) === true) {
-            // blogotext function, todo : remove this dependancy
-            fichier_index($folder);
-            // blogotext function, todo : remove this dependancy
-            fichier_htaccess($folder); // to prevent direct access to files
-        } else {
-            echo $content;
-            exit();
-        }
+    if (!is_dir($folder) && !create_folder($folder, false, true)) {
+        echo $content;
+        exit();
     }
 
     echo $content;
