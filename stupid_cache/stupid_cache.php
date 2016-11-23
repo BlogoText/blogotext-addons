@@ -51,17 +51,17 @@ $GLOBALS['addons'][] = array(
     'version' => '0.0.3',
 
     'settings' => array(
-            'cache_ttl' => array(
-                    'type' => 'int',
-                    'label' => array(
-                            'en' => 'FYI - Cache TTL (in sec)',
-                            'fr' => 'Pour votre information - Durée du cache (en sec)'
-                        ),
-                    'value' => 60,
-                    'value_min' => 59,
-                    'value_max' => 61,
-                ),
+        'cache_ttl' => array(
+            'type' => 'int',
+            'label' => array(
+                'en' => 'FYI - Cache TTL (in sec)',
+                'fr' => 'Pour votre information - Durée du cache (en sec)'
+            ),
+            'value' => 60,
+            'value_min' => 59,
+            'value_max' => 61,
         ),
+    ),
 
     'hook-push' => array(
             'system-start' => array(
@@ -70,18 +70,18 @@ $GLOBALS['addons'][] = array(
                 )
         ),
     'buttons' => array(
-            'hellow-world' => array(
-                    'callback' => 'addon_stupid_cache_hello',
-                    'label' => array(
-                            'en' => 'just a test',
-                            'fr' => 'juste un test'
-                        ),
-                    'desc' => array(
-                            'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
-                            'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
-                        ),
-                )
-        )
+        'hellow-world' => array(
+            'callback' => 'addon_stupid_cache_hello',
+                'label' => array(
+                    'en' => 'just a test',
+                    'fr' => 'juste un test'
+                ),
+                'desc' => array(
+                    'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
+                    'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
+                ),
+            )
+    )
 );
 
 
@@ -98,11 +98,11 @@ function addon_stupid_cache_hello()
 function addon_stupid_cache_at_start()
 {
     // don't want use cache ?
-    if (isset($_GET['no-stupid-cache'])){
+    if (isset($_GET['no-stupid-cache'])) {
         return true;
     }
 
-    echo '<h1>Ok : Started</h1>';
+    echo '<h3>Ok : Started</h3>';
 
     // can be cached ?
     if (isset($_GET['d']) and preg_match('#^\d{4}/\d{2}/\d{2}/\d{2}/\d{2}/\d{2}#', $_GET['d'])) {
@@ -120,14 +120,14 @@ function addon_stupid_cache_at_start()
 
 function addon_stupid_cache_get_from_cache($path)
 {
-    if (!file_exists($path)){
+    if (!file_exists($path)) {
         return false;
     }
     if ((time()-filemtime($path)) > 60) {
         return false;
     }
     $cached = file_get_contents($path);
-    if ($cached !== false){
+    if ($cached !== false) {
         global $begin;
         echo $cached;
         $end = microtime(true);
@@ -144,8 +144,8 @@ function addon_stupid_cache_put_url_in_cache($path)
 
     $opts = array(
         'http'=>array(
-            'method'=>"GET",
-            'header'=>"Accept-language: fr",
+            'method' => "GET",
+            'header' => "Accept-language: fr",
             'timeout' => 1 
         )
     );
