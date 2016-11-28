@@ -6,9 +6,20 @@
 # 2016 Mickaël S. <contact@tiger-222.fr>
 # *** LICENSE ***
 
-$GLOBALS['addons'][] = array(
+/**
+ * Changelog
+ *
+ * 0.1.0
+ *  2016-11-28 RemRem, maybe need more work
+ *  - upd addon to be BT#160 compliant 
+ *  - fix #12
+ *  - upd current version to 0.X (dev version)
+ */
+
+$declaration = array(
     'tag' => 'relatedposts',
-    'version' => '1.0.0',
+    'version' => '0.1.0',
+    'compliancy' => '3.7',
     'url' => 'http://www.tiger-222.fr/',
 
     'name' => array(
@@ -46,10 +57,9 @@ $GLOBALS['addons'][] = array(
 
 // Include the posts list.
 // To use in theme/$theme/post.html.
-function addon_relatedposts()
+function a_relatedposts()
 {
-    $conf = addon_get_conf('relatedposts');
-    $nbPosts = $conf['nb_posts']['value'];
+    $nbPosts = addon_get_setting('relatedposts','nb_posts');
 
     // 1. Get the post ID
     $postId = (string)filter_input(INPUT_GET, 'd');
@@ -100,7 +110,7 @@ function addon_relatedposts()
     // 4. Generate the list
     $html = '<div class="related-posts">';
     $html .= '<p>';
-        $html .= sprintf($conf['sentence']['value'], '<span class="category">'.htmlentities($tag).'</span>');
+        $html .= sprintf(addon_get_setting('relatedposts','sentence'), '<span class="category">'.htmlentities($tag).'</span>');
     $html .= '</p>';
     $html .= '<ul>';
     foreach ($relatedPosts as $post) {

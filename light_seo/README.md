@@ -11,7 +11,6 @@ https://github.com/remrem/blogotext/tree/testing
 ## How to use
  - download and install https://github.com/remrem/blogotext/tree/dev
  - put the folder "light_seo" in the blogotext "addons" folder
- - \addons\light_seo\cache\ folder must be readable+writable
  - the plugin must create some folders in your blog directory
     - "article/" and ".htaccess" 
     - "link/" and ".htaccess" 

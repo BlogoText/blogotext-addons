@@ -4,7 +4,17 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
-$GLOBALS['addons'][] = array(
+/**
+ * Changelog
+ *
+ * 0.1.0
+ *  2016-11-28 RemRem, maybe need more work
+ *  - upd addon to be BT#160 compliant 
+ *  - fix #12
+ *  - upd current version to 0.X (dev version)
+ */
+
+$declaration = array(
     'tag' => 'readmore',
     'name' => array(
         'en' => 'Read more',
@@ -14,7 +24,8 @@ $GLOBALS['addons'][] = array(
         'en' => 'List 3 "read-also like" thumbnails below each post.',
         'fr' => 'Afficher des image d\'autres articles.',
     ),
-    'version' => '1.0.0',
+    'version' => '0.1.0',
+    'compliancy' => '3.7',
     'css' => 'style.css',
 
     'config' => array(
@@ -31,10 +42,9 @@ $GLOBALS['addons'][] = array(
     ),
 );
 
-function addon_readmore()
+function a_readmore()
 {
-    $conf = addon_get_conf('readmore');
-    $nbPosts = $conf['nb_posts']['value'];
+    $nbPosts = addon_get_setting('readmore','nb_posts');
 
     // Find all posts
     $sql = '
@@ -45,7 +55,7 @@ function addon_readmore()
     try {
         $result = $GLOBALS['db_handle']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
-        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error addon_readmore(): '.$e->getMessage() : '';
+        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error a_readmore(): '.$e->getMessage() : '';
     }
 
     // Clean array
@@ -65,7 +75,7 @@ function addon_readmore()
     try {
         $posts = $GLOBALS['db_handle']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
-        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error fetch content addon_readmore(): '.$e->getMessage() : '';
+        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error fetch content a_readmore(): '.$e->getMessage() : '';
     }
 
     // Generates the list
@@ -79,7 +89,7 @@ function addon_readmore()
         }
         // Generates the link
         $decId = decode_id($post['bt_id']);
-        $link = $GLOBALS['racine'].'?d='.implode('/', $decId).'-'.titre_url($post['bt_title']);
+        $link = URL_ROOT.'?d='.implode('/', $decId).'-'.titre_url($post['bt_title']);
         $html .= "\t".'<li style="background-image: url('.$img.');"><a href="'.$link.'">'.$post['bt_title'].'</a></li>'."\n";
     }
     $html .= '</ul>'."\n";

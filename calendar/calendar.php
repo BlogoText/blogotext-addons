@@ -4,7 +4,16 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
-$GLOBALS['addons'][] = array(
+/**
+ * Changelog
+ *
+ * 0.1.0 2016-11-28 RemRem
+ *  - upd addon to be BT#160 compliant 
+ *  - fix #12
+ *  - upd current version to 0.X (dev version)
+ */
+
+$declaration = array(
     'tag' => 'calendar',
     'name' => array(
         'en' => 'Calendar',
@@ -15,10 +24,11 @@ $GLOBALS['addons'][] = array(
         'fr' => 'Affiche un calendrier navigable.',
     ),
     'version' => '1.0.0',
+    'compliancy' => '3.7',
     'css' => 'style.css',
 );
 
-function addon_calendar()
+function a_calendar()
 {
     // Get the post ID
     $date = date('Ym');
@@ -33,7 +43,10 @@ function addon_calendar()
     } elseif (preg_match('#^\d{14}#', $postId)) {
         $date = substr($postId, 0, 8);
     }
-
+    // quick fix for #12 (http 500 when url modified)
+    if (!is_int($date)) {
+        $date = date('Ym');
+    }
     $year = substr($date, 0, 4);
     $thisMonth = substr($date, 4, 2);
     $thisDay = (strlen(substr($date, 6, 2)) == 2) ? substr($date, 6, 2) : '';
@@ -61,12 +74,12 @@ function addon_calendar()
     }
 
     // We look for previous and next post dates
-    list($previousPost, $nextPost) = prev_next_posts_($year, $thisMonth, $where);
+    list($previousPost, $nextPost) = a_calendar_prev_next_posts_($year, $thisMonth, $where);
     $previousMonth = '?'.$qstring.'d='.substr($previousPost, 0, 4).'/'.substr($previousPost, 4, 2);
     $nextMonth = '?'.$qstring.'d='.substr($nextPost, 0, 4).'/'.substr($nextPost, 4, 2);
 
     // List of days containing at least one post for this month
-    $datesList = table_list_date_($year.$thisMonth, $where);
+    $datesList = a_calendar_table_list_date_($year.$thisMonth, $where);
 
     // Calendar header
     $html = '<table id="calendar">'."\n";
@@ -114,7 +127,7 @@ function addon_calendar()
 }
 
 // Returns a list of days containing at least one post for a given month
-function table_list_date_($date, $table)
+function a_calendar_table_list_date_($date, $table)
 {
     $return = array();
     $column = ($table == 'articles') ? 'bt_date' : 'bt_id';
@@ -131,12 +144,12 @@ function table_list_date_($date, $table)
         }
         return $return;
     } catch (Exception $e) {
-        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error addon_calendar:table_list_date_(): '.$e->getMessage() : '';
+        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error addon_calendar:a_calendar_table_list_date_(): '.$e->getMessage() : '';
     }
 }
 
 // Returns dates of the previous and next visible posts
-function prev_next_posts_($year, $month, $table)
+function a_calendar_prev_next_posts_($year, $month, $table)
 {
     $column = ($table == 'articles') ? 'bt_date' : 'bt_id';
     $date = new DateTime();
@@ -165,6 +178,6 @@ function prev_next_posts_($year, $month, $table)
         $req = $GLOBALS['db_handle']->query($query);
         return array_values($req->fetch(PDO::FETCH_ASSOC));
     } catch (Exception $e) {
-        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error addon_calendar:prev_next_posts_(): '.$e->getMessage() : '';
+        return ((bool)DISPLAY_PHP_ERRORS) ? 'Error addon_calendar:a_calendar_prev_next_posts_(): '.$e->getMessage() : '';
     }
 }
