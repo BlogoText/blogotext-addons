@@ -8,7 +8,7 @@
  * @author    RemRem <>
  * @copyright Copyright (C) RemRem
  * @licence   MIT
- * @version   0.0.10 POC
+ * @version   0.0.12 POC
  *
  * You can redistribute it under the terms of the MIT / X11 Licence.
  */
@@ -184,17 +184,17 @@ $declaration = array(
 
 function a_light_seo_is_active($part)
 {
-    return (bool)addon_get_setting('light_seo',$part);
+    return (bool)addon_get_setting('light_seo', $part);
 }
 
 function a_stupid_cache_remove_created_folder_url_rewrite()
 {
-    
+    // todo
 }
 
 function a_light_seo_is_debug()
 {
-    return addon_get_setting('light_seo','debug_mode');
+    return addon_get_setting('light_seo', 'debug_mode');
 }
 
 /**
