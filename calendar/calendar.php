@@ -8,7 +8,7 @@
  * Changelog
  *
  * 0.1.0 2016-11-28 RemRem
- *  - upd addon to be BT#160 compliant 
+ *  - upd addon to be BT#160 compliant
  *  - fix #12
  *  - upd current version to 0.X (dev version)
  */
