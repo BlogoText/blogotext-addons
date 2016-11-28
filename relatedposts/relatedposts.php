@@ -11,7 +11,7 @@
  *
  * 0.1.0
  *  2016-11-28 RemRem, maybe need more work
- *  - upd addon to be BT#160 compliant 
+ *  - upd addon to be BT#160 compliant
  *  - fix #12
  *  - upd current version to 0.X (dev version)
  */
@@ -59,7 +59,7 @@ $declaration = array(
 // To use in theme/$theme/post.html.
 function a_relatedposts()
 {
-    $nbPosts = addon_get_setting('relatedposts','nb_posts');
+    $nbPosts = addon_get_setting('relatedposts', 'nb_posts');
 
     // 1. Get the post ID
     $postId = (string)filter_input(INPUT_GET, 'd');
@@ -110,7 +110,7 @@ function a_relatedposts()
     // 4. Generate the list
     $html = '<div class="related-posts">';
     $html .= '<p>';
-        $html .= sprintf(addon_get_setting('relatedposts','sentence'), '<span class="category">'.htmlentities($tag).'</span>');
+        $html .= sprintf(addon_get_setting('relatedposts', 'sentence'), '<span class="category">'.htmlentities($tag).'</span>');
     $html .= '</p>';
     $html .= '<ul>';
     foreach ($relatedPosts as $post) {
