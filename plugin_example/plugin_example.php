@@ -29,6 +29,16 @@
  */
 
 
+/**
+ * Changelog
+ *
+ * 0.1.0 2016-11-28 RemRem, maybe need more work
+ *  - upd addon to be BT#160 compliant
+ *  - fix #12
+ *  - upd current version to 0.X (dev version)
+ */
+
+
 /*
  * First, you must add a new entry to the global $addons.
  * Keywords accepted:
@@ -74,7 +84,7 @@
  *  3 - play with label for bool and check in your public interface (in the side nav bar)
  */
 
-$GLOBALS['addons'][] = array(
+$declaration = array(
     // the tag of your addon (required)
     'tag' => 'plugin_example',
 
@@ -91,7 +101,8 @@ $GLOBALS['addons'][] = array(
     ),
 
     // the version, showed in admin/addon (required)
-    'version' => '1.0.1',
+    'version' => '0.1.0',
+    'compliancy' => '3.7',
 
     // if your plugin allow user (admin) to change some params
     'config' => array(
@@ -183,15 +194,15 @@ $GLOBALS['addons'][] = array(
  *
  * You can use BlogoText function and defines.
  */
-function addon_plugin_example()
+function a_plugin_example()
 {
     // get the addon conf (if you need)
-    $addon_conf = addon_get_conf('plugin_example');
+    $exemple_config_1 = addon_get_setting('plugin_example', 'exemple_config_1');
 
     // do your stuff...
     $html = '<div id="addon_plugin_example">';
 
-    if ($addon_conf['exemple_config_1']['value'] == 1) {
+    if ($exemple_config_1 == 1) {
         $html .= 'exemple_config_1 is <span class="true">true !</span>';
     } else {
         $html .= 'exemple_config_1 is <span class="false">false !</span>';
@@ -199,6 +210,6 @@ function addon_plugin_example()
 
     $html .= '</div>';
 
-    // the {addon_plugin_example} will be replaced by $html
+    // the {a_plugin_example} will be replaced by $html
     return $html;
 }

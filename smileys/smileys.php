@@ -4,7 +4,17 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
-$GLOBALS['addons'][] = array(
+/**
+ * Changelog
+ *
+ * 0.1.0
+ *  2016-11-28 RemRem, maybe need more work
+ *  - upd addon to be BT#160 compliant
+ *  - fix #12
+ *  - upd current version to 0.X (dev version)
+ */
+
+$declaration = array(
     'tag' => 'smileys',
     'name' => array(
         'en' => 'Smileys',
@@ -15,6 +25,7 @@ $GLOBALS['addons'][] = array(
         'fr' => 'Convertit des smileys en émojis. ex : ";)" -> "😉".',
     ),
     'url' => 'http://yeuxdelibad.net',
-    'version' => '1.0.0',
+    'version' => '0.1.0',
+    'compliancy' => '3.7',
     'js' => 'smileys.js',
 );
