@@ -8,7 +8,7 @@
  * @author    RemRem <>
  * @copyright Copyright (C) RemRem
  * @licence   MIT
- * @version   0.0.12 POC
+ * @version   0.0.13 POC
  *
  * You can redistribute it under the terms of the MIT / X11 Licence.
  */
@@ -19,6 +19,9 @@
  *
  * DO NO USE IN PROD !
  * REALLY !
+ *
+ * 0.0.13
+ *  - add some stuff
  *
  * 0.0.12
  *  - upd conforme PR #160
@@ -163,17 +166,50 @@ $declaration = array(
                 ),
         ),
     'buttons' => array(
-            'remove-created-folder-url-rewrite' => array(
-                    'callback' => 'a_stupid_cache_remove_created_folder_url_rewrite',
+            'return-an-array-true' => array(
+                    'callback' => 'a_light_seo_return_array_true',
                     'label' => array(
-                            'en' => 'Remove created folder for url rewrite',
+                            'en' => 'Return an array (true)',
                             // 'fr' => 'S'
                         ),
                     'desc' => array(
                             'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
                             // 'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
                         ),
-                )
+                ),
+            'return-an-array-false' => array(
+                    'callback' => 'a_light_seo_return_array_false',
+                    'label' => array(
+                            'en' => 'Return an array (false)',
+                            // 'fr' => 'S'
+                        ),
+                    'desc' => array(
+                            'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
+                            // 'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
+                        ),
+                ),
+            'return-true' => array(
+                    'callback' => 'a_light_seo_return_true',
+                    'label' => array(
+                            'en' => 'Return true',
+                            // 'fr' => 'S'
+                        ),
+                    'desc' => array(
+                            'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
+                            // 'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
+                        ),
+                ),
+            'return-false' => array(
+                    'callback' => 'a_light_seo_return_false',
+                    'label' => array(
+                            'en' => 'Return false',
+                            // 'fr' => 'S'
+                        ),
+                    'desc' => array(
+                            'en' => 'EN - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... ',
+                            // 'fr' => 'FR - Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... Lorem ipsum ... '
+                        ),
+                ),
         )
 );
 
@@ -182,19 +218,42 @@ $declaration = array(
  * functions
  */
 
-function a_light_seo_is_active($part)
+
+function a_light_seo_return_false()
 {
-    return (bool)addon_get_setting('light_seo', $part);
+    return false;
+}
+function a_light_seo_return_true()
+{
+    return true;
+}
+function a_light_seo_return_array_true()
+{
+    return array(
+            'success' => true,
+            'message' => 'This is a dev note to the user when array and true !'
+        );
+}
+function a_light_seo_return_array_false()
+{
+    return array(
+            'success' => false,
+            'message' => 'This is a dev note to the user when array and false !'
+        );
 }
 
-function a_stupid_cache_remove_created_folder_url_rewrite()
+
+
+
+
+function a_light_seo_is_active($part)
 {
-    // todo
+    return (bool)addon_get_setting('light_seo',$part);
 }
 
 function a_light_seo_is_debug()
 {
-    return addon_get_setting('light_seo', 'debug_mode');
+    return addon_get_setting('light_seo','debug_mode');
 }
 
 /**
@@ -266,7 +325,7 @@ function a_light_seo_update_robots_txt()
         $robots .= "\r".'Sitemap: '. a_light_seo_return_clean_url(a_light_seo_get_relative_url() .'/sitemap.xml');
     }
 
-    return (file_put_contents($file, $robots) !== false);
+    return (file_put_contents($file, $robots, LOCK_EX) !== false);
 }
 
 
@@ -309,7 +368,7 @@ function a_light_seo_build_sitemap()
     $xml .= '</urlset>';
 
     a_light_seo_update_robots_txt();
-    return (file_put_contents($file, $xml) !== false);
+    return (file_put_contents($file, $xml, LOCK_EX) !== false);
 }
 
 
@@ -345,9 +404,15 @@ function a_light_seo_hook_work_on_content($args)
                 '&amp;mode=links" rel="tag"',
                 '@import url(\'',
                 '<link rel="stylesheet" href="themes/',
+                '<link rel="stylesheet" href="addons/',
                 'action="?addon_light_seo=/',
                 'class="com-gravatar" src="themes/',
                 '/&amp;',
+                // fix
+                'http://http',
+                'https://https',
+                '//http:',
+                '//https:',
             ),
         array(
                 'href="'.$rel.'?liste"',
@@ -363,9 +428,15 @@ function a_light_seo_hook_work_on_content($args)
                 '?mode=links" rel="tag"',
                 '@import url(\''. $rel,
                 '<link rel="stylesheet" href="'. $rel .'themes/',
+                '<link rel="stylesheet" href="'. $rel .'addons/',
                 'action="'. $rel,
                 'class="com-gravatar" src="'.$rel.'themes/',
                 '/?',
+                // fix
+                'http:',
+                'https:',
+                'http:',
+                'https:',
             ),
         $args['1']
     );
@@ -453,7 +524,8 @@ function a_light_seo_hook_at_start($args = array())
 
             file_put_contents(
                 BT_ROOT.'/'. $rewrite .'/.htaccess',
-                "\r\n".'RewriteEngine on'."\r\n".'RewriteRule ^(.*)$ '. a_light_seo_return_clean_url(a_light_seo_get_relative_url() .'/index.php?addon_light_seo=/'). $rewrite .'/$1 [NC,L,QSA]'."\r\n"
+                "\r\n".'RewriteEngine on'."\r\n".'RewriteRule ^(.*)$ '. a_light_seo_return_clean_url(a_light_seo_get_relative_url() .'/index.php?addon_light_seo=/'). $rewrite .'/$1 [NC,L,QSA]'."\r\n",
+                LOCK_EX
             );
         }
     }
@@ -540,7 +612,7 @@ function a_light_seo_blogo_to_addon($url, $url_type = 'article')
     $db_url = a_light_seo_get_db()->dataGet($url);
 
     // not in db
-    if (is_null($db_url)) {
+    if ($db_url === null) {
         if (preg_match("/\?d=(\d{4}\/\d{2}\/\d{2}\/\d{2}\/\d{2}\/\d{2})-/", $url, $matches)) {
             $tab = explode('/', $matches['1']);
             $id = substr($tab['0'].$tab['1'].$tab['2'].$tab['3'].$tab['4'].$tab['5'], '0', '14');
