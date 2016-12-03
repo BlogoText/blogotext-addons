@@ -105,12 +105,16 @@ $declaration = array(
     'compliancy' => '3.7',
 
     // if your plugin allow user (admin) to change some params
-    'config' => array(
+    'settings' => array(
         'exemple_config_1' => array(
             'type' => 'bool',
             'label' => array(
                 'en' => 'label for bool',
                 'fr' => 'label pour bool'
+            ),
+            'desc' => array(
+                'en' => 'Just a showcase...',
+                'fr' => 'Juste un exemple...',
             ),
             'value' => true,
         ),
@@ -119,6 +123,10 @@ $declaration = array(
             'label' => array(
                 'en' => 'label for int',
                 'fr' => 'label pour int'
+            ),
+            'desc' => array(
+                'en' => 'Just a showcase...',
+                'fr' => 'Juste un exemple...',
             ),
             'value' => true,
             'value' => 10,
@@ -131,6 +139,10 @@ $declaration = array(
                 'en' => 'label for text',
                 'fr' => 'label pour text'
             ),
+            'desc' => array(
+                'en' => 'Just a showcase...',
+                'fr' => 'Juste un exemple...',
+            ),
             'value' => 'There is an exemple.',
         ),
         'exemple_config_4' => array(
@@ -138,6 +150,10 @@ $declaration = array(
             'label' => array(
                 'en' => 'label for select',
                 'fr' => 'label pour select'
+            ),
+            'desc' => array(
+                'en' => 'Just a showcase...',
+                'fr' => 'Juste un exemple...',
             ),
             'options' => array(
                 'value1' => array(

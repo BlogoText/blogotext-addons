@@ -216,7 +216,7 @@ function a_stupid_cache_put_url_in_cache($path, $debug_mode)
     );
 
     $context = stream_context_create($opts);
-    $content = file_get_contents($url, false, $context);
+    $content = @file_get_contents($url, false, $context);
 
     // todo : check 404
     if ($content === false) {
@@ -238,7 +238,7 @@ function a_stupid_cache_put_url_in_cache($path, $debug_mode)
     }
 
     echo $content;
-    if (file_put_contents($path, $content) === false) {
+    if (file_put_contents($path, $content, LOCK_EX) === false) {
         // for dev testing
         if ($debug_mode == true) {
             echo '<pre>Stupid cache > fail to put in cache</pre>';
