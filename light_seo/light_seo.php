@@ -248,12 +248,12 @@ function a_light_seo_return_array_false()
 
 function a_light_seo_is_active($part)
 {
-    return (bool)addon_get_setting('light_seo',$part);
+    return (bool)addon_get_setting('light_seo', $part);
 }
 
 function a_light_seo_is_debug()
 {
-    return addon_get_setting('light_seo','debug_mode');
+    return addon_get_setting('light_seo', 'debug_mode');
 }
 
 /**

@@ -33,7 +33,7 @@
  * Changelog
  *
  * 0.1.0 2016-11-28 RemRem, maybe need more work
- *  - upd addon to be BT#160 compliant 
+ *  - upd addon to be BT#160 compliant
  *  - fix #12
  *  - upd current version to 0.X (dev version)
  */
@@ -213,7 +213,7 @@ $declaration = array(
 function a_plugin_example()
 {
     // get the addon conf (if you need)
-    $exemple_config_1 = addon_get_setting('plugin_example','exemple_config_1');
+    $exemple_config_1 = addon_get_setting('plugin_example', 'exemple_config_1');
 
     // do your stuff...
     $html = '<div id="addon_plugin_example">';
