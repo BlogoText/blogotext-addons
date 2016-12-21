@@ -103,7 +103,7 @@ function a_calendar()
         $class = $day == ($thisDay) ? ' class="active"' : '';
         $link = $day;
         if (in_array($day, $datesList)) {
-            $link = '<a href="?'.$qstring.'d='.$year.'/'.$thisMonth.'/'.str2($day).'">'.$day.'</a>';
+            $link = '<a href="?'.$qstring.'d='.$year.'/'.$thisMonth.'/'.str_pad($day, 2, '0', STR_PAD_LEFT).'">'.$day.'</a>';
         }
         $html .= '<td'.$class.'>'.$link.'</td>';
         $dayOffset++;
