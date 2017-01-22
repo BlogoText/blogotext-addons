@@ -1,5 +1,6 @@
 // stolen from http://www.tiger-222.fr/?d=2016/10/18/14/00/25-scrollbar-horizontale
-function scroll_bar() {
+function scroll_bar()
+{
     'use strict';
     var t = document.querySelector('#scroll-bar'),
         a = document.body.clientHeight,
