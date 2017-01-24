@@ -70,7 +70,7 @@ $declaration = array(
     // (required) the version, showed in admin/addon
     'version' => '0.1.1',
 
-	// (required) the compliancy with BT version (major.minor)
+    // (required) the compliancy with BT version (major.minor)
     'compliancy' => '3.7',
 
     // (optional) if your plugin allow user (admin) to change some params
