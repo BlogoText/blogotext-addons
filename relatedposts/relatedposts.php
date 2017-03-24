@@ -9,6 +9,10 @@
 /**
  * Changelog
  *
+ * 1.0.0 2017-01-24 RemRem
+ *  - upd version for BT 3.7
+ *  - upd addons declaration (config > settings)
+ *
  * 0.1.0
  *  2016-11-28 RemRem, maybe need more work
  *  - upd addon to be BT#160 compliant
@@ -18,7 +22,7 @@
 
 $declaration = array(
     'tag' => 'relatedposts',
-    'version' => '0.1.0',
+    'version' => '1.0.0',
     'compliancy' => '3.7',
     'url' => 'http://www.tiger-222.fr/',
 
@@ -31,7 +35,7 @@ $declaration = array(
         'fr' => 'Afficher une liste d\'articles en relation avec celui en cours de lecture.',
     ),
 
-    'config' => array(
+    'settings' => array(
         'nb_posts' => array(
             'type' => 'int',
             'label' => array(

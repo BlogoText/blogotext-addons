@@ -4,6 +4,13 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
+/**
+ * Changelog
+ *
+ * 1.0.0 2017-01-24 RemRem
+ *  - upd version for BT 3.7
+ */
+ 
 $declaration = array(
     'tag' => 'highlight',
 
@@ -19,7 +26,7 @@ $declaration = array(
     ),
 
     // the version, showed in admin/addon (required)
-    'version' => '0.1.0',
+    'version' => '1.0.0',
     'compliancy' => '3.7',
 
     'css' => 'highlight.css',

@@ -23,6 +23,11 @@
  *
  *    Source of the tool: https://github.com/squizlabs/PHP_CodeSniffer
  *
+ * 4. Take a look at the official documentation on the GitHub wiki :
+ *    FR - Intro aux addons - https://github.com/BoboTiG/blogotext/wiki/[WIP][FR][addon]-introduction-à-la-création-d'un-addon
+ *    FR - Intro aux hooks - https://github.com/BoboTiG/blogotext/wiki/[WIP][FR][hook]-introduction-et-informations-utiles
+ *    EN - Coming Soon ;)
+ * 
  * That's it! Enjoy and good luck :)
  *
  * =================================================================================
@@ -32,6 +37,9 @@
 /**
  * Changelog
  *
+ * 0.1.1 2017-01-24 RemRem
+ *  - upd comments
+ *
  * 0.1.0 2016-11-28 RemRem, maybe need more work
  *  - upd addon to be BT#160 compliant
  *  - fix #12
@@ -40,71 +48,32 @@
 
 
 /*
- * First, you must add a new entry to the global $addons.
- * Keywords accepted:
- *
- * 'tag' => 'plugin_example'
- * (required)
- * This is the addon ID. It must have the same name of this file without ".php".
- * The directory tree has to be "${addon ID}/${addon ID}.php".
- *
- * 'name' => 'Plugin Example'
- * (required)
- * This is the displayed name into back office. You can add translations using an associative array.
- *
- * 'desc' => 'Your plugin description.'
- * (required)
- * This is the addon description. You can add translations using an associative array.
- *
- * 'version' => '1.0.0'
- * (required)
- * Addon version that should follow the SemVer notation: http://semver.org/.
- *
- * 'url' => 'http://example.org/bt-addons/plugin_example'
- * (optional but highly recommended)
- * Addon developer website, for addon support.
- *
- * 'css' => 'style.css'
- * 'css' => array('style1.css', 'style1.css')
- * (optional)
- * CSS files to include. You can specifiy several files using an array of filenames.
- *
- * 'js' => 'script.js'
- * 'js' => array('script1.js', 'script.js')
- * (optional)
- * JS files to include. You can specifiy several files using an array of filenames.
- */
-
-
-/**
- * for the show case,
- *  1 - edit your /themes/default/list.html
- *      - add {addon_plugin_example} in #body-layout > #sidenav
- *  2 - go to the admin interface / modules / Plugin example / params
- *  3 - play with label for bool and check in your public interface (in the side nav bar)
+ * First, you must declare your addon
  */
 
 $declaration = array(
-    // the tag of your addon (required)
+    // (required) the tag of your addon
     'tag' => 'plugin_example',
 
-    // the name, showed in admin/addon (required)
+    // (required) the name, showed in admin/addon
     'name' => array(
         'en' => 'Plugin example',
         'fr' => 'Plugin exemple',
     ),
 
-    // the desc, showed in admin/addon (required)
+    // (required) the desc, showed in admin/addon
     'desc' => array(
         'en' => 'Just a showcase... Don\'t use it in prod !',
         'fr' => 'Juste un exemple... Ne pas utiliser en prod !',
     ),
 
-    // the version, showed in admin/addon (required)
-    'version' => '0.1.0',
+    // (required) the version, showed in admin/addon
+    'version' => '0.1.1',
+
+    // (required) the compliancy with BT version (major.minor)
     'compliancy' => '3.7',
 
-    // if your plugin allow user (admin) to change some params
+    // (optional) if your plugin allow user (admin) to change some params
     'settings' => array(
         'exemple_config_1' => array(
             'type' => 'bool',
@@ -170,7 +139,7 @@ $declaration = array(
     ),
 
     /**
-     * optional, define your own style
+     * (optional) define your own style
      * css file(s) must be in /addons/{your addon}/
      * 'css' can be a string :
      *    'css' => 'example.css'
@@ -180,7 +149,7 @@ $declaration = array(
     'css' => 'style.css',
 
     /**
-     * optional, define your own script
+     * (optional) define your own script
      * js file(s) must be in /addons/{your addon}/
      * 'js' can be a string :
      *    'js' => 'example.js'
@@ -190,7 +159,7 @@ $declaration = array(
     //'js' => 'script.js',
 
     /**
-     * optional but highly recommended
+     * (optional) (but recommended)
      * Addon developer website, for addon support.
      */
     'url' => 'http://example.org/bt-addons/plugin_example'
@@ -198,9 +167,11 @@ $declaration = array(
 
 /*
  * You must declare the callback function as follow:
- *     function addon_${addon tag}() { ... }
+ *     function a_${addon tag}() { ... }
  *
- * Note: if your addon contains only CSS/JS files, no need to define such a function.
+ * Note: 
+ *   if your addon contains only CSS/JS files or/and use hook without a template tag, 
+ *   no need to define this function.
  *
  * The function has to return valid HTML data.
  * In this addon, it returns a HTML <table> calendar.
