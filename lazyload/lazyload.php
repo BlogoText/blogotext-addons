@@ -48,11 +48,11 @@ function a_lazy_work_on_content($datas)
     foreach ($datas['1'] as &$art) {
 
         $doc = new DOMDocument();
-        $doc->loadHTML($art['content']);
+        $doc->loadHTML($art['bt_content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imgs = $doc->getElementsByTagName('img');
         foreach ($imgs as $i) {
             // save img in <noscript>
-            $noscript = '<noscript>' . $i . '</noscript>';
+            //$noscript = '<noscript>' . $i . '</noscript>';
 
             // get src
             $old_src = $i->getAttribute('src');
@@ -62,12 +62,15 @@ function a_lazy_work_on_content($datas)
 
             // set data-src as src
             $i->setAttribute('data-src', $old_src);
+            // set class
+            $i->setAttribute('class','lazy-load');
 
             // save
-            $i = $noscript . $i;
+            //$i = $noscript . $i;
+            //$doc->saveHTML($i);
 
         }
-        $art['content'] = $doc->saveHTML();
+        $art['bt_content'] = $doc->saveHTML();
     }
 
     return $datas;
