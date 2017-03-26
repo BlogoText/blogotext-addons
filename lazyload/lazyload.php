@@ -65,7 +65,10 @@ function a_lazy_work_on_content($datas)
         $doc->loadHTML($art['bt_content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imgs = $doc->getElementsByTagName('img');
 
-        foreach ($imgs as $img) {
+        // on traite les images
+        for ($i = $imgs->length; --$i >= 0; ) {
+            $img = $imgs->item($i);
+
             $orgin_src = $img->getAttribute('src');
             $orgin_alt = $img->getAttribute('alt');
 
