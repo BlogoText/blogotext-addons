@@ -44,32 +44,54 @@ function a_lazy_work_on_content($datas)
         return $datas;
     }
 
+    // on ne traite que les articles (à adapter au besoin)
+    if ($datas['2'] != 'articles') {
+        return $datas;
+    }
+
     // parcours les articles
     foreach ($datas['1'] as &$art) {
+
+        // check presence de <img
+        if (strpos($art['bt_content'], '<img') === false) {
+            continue;
+        }
+
+        // Je ne sais pas pourquoi, mais sans convertir en UTF-8, ça merdouille ...
+        // du moins sur un environement window, à tester sous linux
+        $art['bt_content'] = mb_convert_encoding($art['bt_content'], 'HTML-ENTITIES', 'UTF-8');
 
         $doc = new DOMDocument();
         $doc->loadHTML($art['bt_content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imgs = $doc->getElementsByTagName('img');
-        foreach ($imgs as $i) {
-            // save img in <noscript>
-            //$noscript = '<noscript>' . $i . '</noscript>';
 
-            // get src
-            $old_src = $i->getAttribute('src');
-            // set src as blank gif
-            $i->removeAttribute('src'); 
-            $i->setAttribute('src', "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="); 
+        foreach ($imgs as $img) {
+            $orgin_src = $img->getAttribute('src');
+            $orgin_alt = $img->getAttribute('alt');
 
             // set data-src as src
-            $i->setAttribute('data-src', $old_src);
-            // set class
-            $i->setAttribute('class','lazy-load');
+            $img->setAttribute('data-src', $orgin_src);
+            // set src as blank gif
+            // $img->removeAttribute('src'); 
+            $img->setAttribute('src', "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="); 
 
-            // save
-            //$i = $noscript . $i;
-            //$doc->saveHTML($i);
 
+            // on gére le noscript
+            $noscript = $doc->createElement('noscript');
+
+            // on insert noscript avant l'image
+            $img->parentNode->insertBefore($noscript, $img);
+
+            // on gére l'image du noscript
+            $alt_img = $doc->createElement('img');
+            // on insert l'img du noscript dans le noscript
+            $noscript->appendChild($alt_img);
+            // on modifie l'img du noscript
+            $alt_img->setAttribute('src', $orgin_src);
+            $alt_img->setAttribute('alt', $orgin_alt);
         }
+
+        // save
         $art['bt_content'] = $doc->saveHTML();
     }
 
