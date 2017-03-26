@@ -13,7 +13,7 @@ $declaration = array(
     // the name, showed in admin/addon (required)
     'name' => array(
         'en' => 'Lazyload images',
-        'fr' => 'Chargement d\'images à la demande',
+        'fr' => 'lazyload - chargement d\'images à la demande',
     ),
 
     // the desc, showed in admin/addon (required)

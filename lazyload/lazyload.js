@@ -1,4 +1,4 @@
-function start_echo()
+function lazyload_start_echo()
 {
     'use strict';
     echo.init({
@@ -12,4 +12,4 @@ function start_echo()
         }
     });
 }
-window.onload = start_echo();
+window.onload = lazyload_start_echo();
