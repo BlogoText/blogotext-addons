@@ -26,13 +26,13 @@ $declaration = array(
     'version' => '1.0.0',
     'compliancy' => '3.7',
     'css' => 'lazyload.css',
-    'js' => 'lazyload.js',
-    'url' => 'https://kaizau.github.io/Lazy-Load-Images-without-jQuery/',
+    'js' => array('echo.js', 'lazyload.js'),
+    'url' => 'http://yeuxdelibad.net',
 
     'hook-push' => array(
             'list_items' => array(
                     'callback' => 'a_lazy_work_on_content',
-                    'priority' => 100 
+                    'priority' => 100
                 )
         ),
 );
@@ -51,7 +51,6 @@ function a_lazy_work_on_content($datas)
 
     // parcours les articles
     foreach ($datas['1'] as &$art) {
-
         // check presence de <img
         if (strpos($art['bt_content'], '<img') === false) {
             continue;
@@ -66,18 +65,20 @@ function a_lazy_work_on_content($datas)
         $imgs = $doc->getElementsByTagName('img');
 
         // on traite les images
-        for ($i = $imgs->length; --$i >= 0; ) {
+        for ($i = $imgs->length; --$i >= 0;) {
             $img = $imgs->item($i);
 
             $orgin_src = $img->getAttribute('src');
             $orgin_alt = $img->getAttribute('alt');
 
-            // set data-src as src
-            $img->setAttribute('data-src', $orgin_src);
+            // set data-echo as src
+            $img->setAttribute('data-echo', $orgin_src);
             // set src as blank gif
-            // $img->removeAttribute('src'); 
-            $img->setAttribute('src', "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="); 
+            // $img->removeAttribute('src');
+            $img->setAttribute('src', "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
 
+            // class lazy-load
+            $img->setAttribute('class', 'lazy-load');
 
             // on gére le noscript
             $noscript = $doc->createElement('noscript');
@@ -93,11 +94,9 @@ function a_lazy_work_on_content($datas)
             $alt_img->setAttribute('src', $orgin_src);
             $alt_img->setAttribute('alt', $orgin_alt);
         }
-
         // save
         $art['bt_content'] = $doc->saveHTML();
     }
 
     return $datas;
 }
-
