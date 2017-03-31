@@ -20,11 +20,26 @@ $declaration = array(
     // the desc, showed in admin/addon (required)
     'desc' => array(
         'en' => 'Horizontal reading progressbar',
-        'fr' => 'Indicateur horizontal de lecture',
+        'fr' => 'Indicateur horizontal de lecture. Pensez au code d\'intégration',
+    ),
+    'settings' => array(
+        'barcolor' => array(
+            'type' => 'text',
+            'label' => array(
+                'en' => 'Color',
+                'fr' => 'Couleur'
+            ),
+            'desc' => array(
+                'en' => 'Color of scroll-bar',
+                'fr' => 'Couleur de la barre de progression',
+            ),
+            'value' => '#7C00FF',
+        ),
     ),
 
+
     // the version, showed in admin/addon (required)
-    'version' => '1.0.0',
+    'version' => '1.1.0',
     'compliancy' => '3.7',
     'css' => 'hscroll.css',
     'js' => 'hscroll.js',
@@ -33,6 +48,7 @@ $declaration = array(
 
 function a_hscroll()
 {
-    $html = '<div id="scroll-bar"><div id="scroll-bar-inner"></div></div>';
+    $color = addon_get_setting('hscroll', 'barcolor');
+    $html = '<div id="scroll-bar"><div id="scroll-bar-inner" style="background:'.$color.'"></div></div>';
     return $html;
 }
