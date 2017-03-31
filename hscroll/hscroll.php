@@ -39,7 +39,7 @@ $declaration = array(
 
 
     // the version, showed in admin/addon (required)
-    'version' => '1.0.0',
+    'version' => '1.1.0',
     'compliancy' => '3.7',
     'css' => 'hscroll.css',
     'js' => 'hscroll.js',
