@@ -3,13 +3,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 3;
+    z-index: 3000;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden
 }
 #scroll-bar-inner {
-    background-color: rgba(71,162,144,0.8);
     box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     height: 100%
 }
