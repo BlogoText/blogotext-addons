@@ -1,6 +1,6 @@
-# Addons for [BlogoText](https://github.com/BoboTiG/blogotext)
+# Addons for [BlogoText](https://github.com/BlogoText/blogotext)
 
-[![Build Status](https://travis-ci.org/BoboTiG/blogotext-addons.svg?branch=master)](https://travis-ci.org/BoboTiG/blogotext-addons)
+[![Build Status](https://travis-ci.org/BlogoText/blogotext-addons.svg?branch=master)](https://travis-ci.org/BlogoText/blogotext-addons)
 
 ---
 
