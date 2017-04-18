@@ -119,7 +119,7 @@ function a_lazy_work_on_content($datas)
             while ($doc->firstChild) {
                 $doc->removeChild($doc->firstChild);
             }
-            while ($container->firstChild ) {
+            while ($container->firstChild) {
                 $doc->appendChild($container->firstChild);
             }
         }
