@@ -3,6 +3,8 @@
 /**
  * Changelog
  *
+ * 1.0.2 2017-04-19
+ *   fix error message when articles not available (/blog/?liste)
  * 1.0.1 2017-04-18
  *   fix some issues with libxml
  * 1.0.0 2017-03-24 thuban with help of RemRem
@@ -25,7 +27,7 @@ $declaration = array(
     ),
 
     // the version, showed in admin/addon (required)
-    'version' => '1.0.1',
+    'version' => '1.0.2',
     'compliancy' => '3.7',
     'css' => 'lazyload.css',
     'js' => array('echo.js', 'lazyload.js'),
@@ -53,6 +55,10 @@ function a_lazy_work_on_content($datas)
 
     // parcours les articles
     foreach ($datas['1'] as &$art) {
+        // check presence article
+        if (!isset($art['bt_content'])) {
+            continue;
+        }
         // check presence de <img
         if (strpos($art['bt_content'], '<img') === false) {
             continue;
