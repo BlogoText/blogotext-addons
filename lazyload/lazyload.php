@@ -3,6 +3,10 @@
 /**
  * Changelog
  *
+ * 1.0.2 2017-04-19
+ *   fix error message when articles not available (/blog/?liste)
+ * 1.0.1 2017-04-18
+ *   fix some issues with libxml
  * 1.0.0 2017-03-24 thuban with help of RemRem
  */
  
@@ -23,7 +27,7 @@ $declaration = array(
     ),
 
     // the version, showed in admin/addon (required)
-    'version' => '1.0.0',
+    'version' => '1.0.2',
     'compliancy' => '3.7',
     'css' => 'lazyload.css',
     'js' => array('echo.js', 'lazyload.js'),
@@ -51,6 +55,10 @@ function a_lazy_work_on_content($datas)
 
     // parcours les articles
     foreach ($datas['1'] as &$art) {
+        // check presence article
+        if (!isset($art['bt_content'])) {
+            continue;
+        }
         // check presence de <img
         if (strpos($art['bt_content'], '<img') === false) {
             continue;
@@ -61,7 +69,21 @@ function a_lazy_work_on_content($datas)
         $art['bt_content'] = mb_convert_encoding($art['bt_content'], 'HTML-ENTITIES', 'UTF-8');
 
         $doc = new DOMDocument();
-        $doc->loadHTML($art['bt_content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        // set error level (avoid error for href="...&..")
+        $internalErrors = libxml_use_internal_errors(true);
+
+        $libxml_compat = (LIBXML_VERSION >= '20708');
+        if ($libxml_compat) {
+            $doc->loadHTML($art['bt_content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        } else {
+            $doc->loadHTML('<div>'.$art['bt_content'].'</div>');
+            $libxml_compat = false;
+        }
+
+        // Restore error level
+        libxml_use_internal_errors($internalErrors);
+        
         $imgs = $doc->getElementsByTagName('img');
 
         // on traite les images
@@ -94,6 +116,20 @@ function a_lazy_work_on_content($datas)
             $alt_img->setAttribute('src', $orgin_src);
             $alt_img->setAttribute('alt', $orgin_alt);
         }
+
+        // fix for Libxml < 2.7.8
+        // found on http://stackoverflow.com/questions/29493678/loadhtml-libxml-html-noimplied-on-an-html-fragment-generates-incorrect-tags
+        if (!$libxml_compat) {
+            $container = $doc->getElementsByTagName('div')->item(0);
+            $container = $container->parentNode->removeChild($container);
+            while ($doc->firstChild) {
+                $doc->removeChild($doc->firstChild);
+            }
+            while ($container->firstChild) {
+                $doc->appendChild($container->firstChild);
+            }
+        }
+
         // save
         $art['bt_content'] = $doc->saveHTML();
     }
