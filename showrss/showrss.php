@@ -32,7 +32,7 @@ $declaration = array(
                 'en' => 'Feed URL',
                 'fr' => 'Feed URL',
             ),
-            'value' => 'https://framapiaf.org/users/thuban.atom',
+            'value' => 'https://blogotext.org/blog/rss.php',
         ),
     ),
 
