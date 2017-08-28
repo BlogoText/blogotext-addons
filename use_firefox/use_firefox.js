@@ -17,9 +17,13 @@ window.onclick = function (event) {
     }
 }
 
-if ((navigator.userAgent.toLowerCase().indexOf('firefox') == -1) &&
-    (navigator.userAgent.toLowerCase().indexOf('surf') == -1) &&
-    (navigator.userAgent.toLowerCase().indexOf('midori') == -1) &&
-    (navigator.userAgent.toLowerCase().indexOf('konqueror') == -1)) {
+if ((navigator.userAgent.toLowerCase().indexOf('chrome') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('opera') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('vivaldi') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('safari') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('msie') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('samsung') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('nokia') > -1) ||
+    (navigator.userAgent.toLowerCase().indexOf('chromium') > -1)) {
         modal.style.display = "block";
 }
