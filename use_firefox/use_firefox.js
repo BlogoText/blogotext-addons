@@ -17,9 +17,9 @@ window.onclick = function (event) {
     }
 }
 
-if ((navigator.userAgent.toLowerCase().indexOf('firefox') == -1) && 
-	(navigator.userAgent.toLowerCase().indexOf('surf') == -1) && 
-	(navigator.userAgent.toLowerCase().indexOf('midori') == -1) && 
-	(navigator.userAgent.toLowerCase().indexOf('konqueror') == -1)) {
-    modal.style.display = "block";
+if ((navigator.userAgent.toLowerCase().indexOf('firefox') == -1) &&
+    (navigator.userAgent.toLowerCase().indexOf('surf') == -1) &&
+    (navigator.userAgent.toLowerCase().indexOf('midori') == -1) &&
+    (navigator.userAgent.toLowerCase().indexOf('konqueror') == -1)) {
+        modal.style.display = "block";
 }
