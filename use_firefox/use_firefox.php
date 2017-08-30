@@ -51,8 +51,8 @@ $declaration = array(
 
     'version' => '1.0.0',
     'compliancy' => '3.7',
-    'css' => 'use_firefox.css',
-    'js' => 'use_firefox.js',
+    'css' => 'use_firefox.min.css',
+    'js' => 'use_firefox.min.js',
 );
 
 function a_use_firefox()
