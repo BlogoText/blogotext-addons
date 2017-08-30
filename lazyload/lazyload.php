@@ -30,7 +30,7 @@ $declaration = array(
     'version' => '1.0.2',
     'compliancy' => '3.7',
     'css' => 'lazyload.css',
-    'js' => array('echo.js', 'lazyload.js'),
+    'js' => array('echo.js', 'lazyload.min.js'),
     'url' => 'http://yeuxdelibad.net',
 
     'hook-push' => array(
