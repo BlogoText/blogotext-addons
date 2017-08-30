@@ -30,5 +30,5 @@ $declaration = array(
     'url' => 'http://yeuxdelibad.net',
     'version' => '1.0.0',
     'compliancy' => '3.7',
-    'js' => 'smileys.js',
+    'js' => 'smileys.min.js',
 );
