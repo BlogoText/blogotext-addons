@@ -28,7 +28,7 @@ $declaration = array(
     ),
     'version' => '1.0.0',
     'compliancy' => '3.7',
-    'css' => 'style.css',
+    'css' => 'style.min.css',
 );
 
 function a_calendar()

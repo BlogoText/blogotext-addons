@@ -1,6 +1,1 @@
-.lazy-load, .lazy-loaded {
-  transition: ease opacity 0.5s;
-  opacity: 0;
-}
-.lazy-loaded { opacity: 1; }
-
+.lazy-load,.lazy-loaded{transition:ease opacity .5s;opacity:0}.lazy-loaded{opacity:1}
