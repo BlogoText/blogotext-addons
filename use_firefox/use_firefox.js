@@ -3,7 +3,7 @@
 var modal = document.getElementById('use_ffx_modal');
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("use_ffx_close")[0];
+var span = document.getElementById("use_ffx_close");
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {

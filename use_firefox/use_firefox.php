@@ -64,7 +64,7 @@ function a_use_firefox()
     $html = '<div id="use_ffx_modal" class="use_ffx_modal">
     <div class="use_ffx_modal-content">
         <div class="use_ffx_modal-header">
-            <span class="use_ffx_close">&times;</span>
+            <span id="use_ffx_close">&times;</span>
             <h2>'.$msg.'</h2>
         </div>
         <div class="use_ffx_modal-body">
