@@ -1,0 +1,74 @@
+/* The Modal (background) */
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom */
+.use_ffx_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.use_ffx_modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* The Close Button */
+.use_ffx_close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.use_ffx_close:hover,
+.use_ffx_close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.use_ffx_modal-header {
+    padding: 2px 16px;
+    background-color: orange;
+    color: white;
+}
+
+.use_ffx_modal-body {padding: 2px 12px;}
+.use_ffx_modal-header h2 {font-size:18px;}
+.use_ffx_modal-body {color:darkblue;}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}
