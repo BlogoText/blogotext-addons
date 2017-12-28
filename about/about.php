@@ -18,8 +18,8 @@ $declaration = array(
 
     // the desc, showed in admin/addon (required)
     'desc' => array(
-        'en' => 'Description about your blog',
-        'fr' => 'À propos de votre blog',
+        'en' => 'Description about your blog, available on <a href="../?about">about page</a>',
+        'fr' => 'À propos de votre blog, disponible sur <a href="../?about">la page à propos</a>',
     ),
     'settings' => array(
         'title' => array(
