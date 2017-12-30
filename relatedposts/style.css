@@ -92,8 +92,8 @@
 }
 #readmore li > a:hover {
     transition: all .5s ease-out;
-	transform:translateY(-5px);
-	transform:scale(1.1,1.1);
+    transform:translateY(-5px);
+    transform:scale(1.1,1.1);
 }
 
 @media (max-width: 700px) {
