@@ -215,7 +215,7 @@ function a_relatedposts()
         $tag = current($tags);
         try {
             $sql = $GLOBALS['db_handle']->prepare(
-                'SELECT bt_id, bt_title
+                'SELECT bt_id, bt_title, bt_content
                 FROM articles
                 WHERE bt_statut = 1
                         AND bt_id != :id
