@@ -64,7 +64,7 @@ function a_contact()
 }
 
 if (isset($_POST['envoi'])) {
-    require_once '../../config/prefs.php';
+    require_once '../../config/settings.php';
     $destinataire = $GLOBALS['email'];
     
     $message_envoye = "Message send ☺ <br />
