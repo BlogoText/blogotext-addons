@@ -267,29 +267,31 @@ function a_relatedposts()
         $html .= '</div>';
     }
 
-    // 5. change css colors with js
-    $html .= '<script>';
-    $html .= 'var css = document.createElement("style");';
-    $html .= 'css.type = "text/css";';
-        // background
-    $html .= 'css.innerHTML += ".article .related-posts { background-color: '.
-        addon_get_setting('relatedposts', 'backgroundcss') . '}";';
-        // link color
-    $html .= 'css.innerHTML += ".article .related-posts a { color: '.
-        addon_get_setting('relatedposts', 'linkcolor') . '}";';
-        // link bg
-    $html .= 'css.innerHTML += ".article .related-posts a { background-color: '.
-        addon_get_setting('relatedposts', 'linkbgcolor') . '}";';
-        // link hover bg
-    $html .= 'css.innerHTML += ".article .related-posts a:hover { background: '.
-        addon_get_setting('relatedposts', 'linkhoverbgcolor') . '}";';
-        // left squares
-    $html .= 'css.innerHTML += ".article .related-posts a::before { background: '.
-        addon_get_setting('relatedposts', 'squares') . '}";';
-    $html .= 'css.innerHTML += ".article .related-posts a:hover::after { border-left-color: '.
-        addon_get_setting('relatedposts', 'squares') . '}";';
-    $html .= 'document.head.appendChild(css);';
-    $html .= '</script>';
+    // 5. change css colors with js if not images
+    if (! $showimg) {
+        $html .= '<script>';
+        $html .= 'var css = document.createElement("style");';
+        $html .= 'css.type = "text/css";';
+            // background
+        $html .= 'css.innerHTML += ".article .related-posts { background-color: '.
+            addon_get_setting('relatedposts', 'backgroundcss') . '}";';
+            // link color
+        $html .= 'css.innerHTML += ".article .related-posts a { color: '.
+            addon_get_setting('relatedposts', 'linkcolor') . '}";';
+            // link bg
+        $html .= 'css.innerHTML += ".article .related-posts a { background-color: '.
+            addon_get_setting('relatedposts', 'linkbgcolor') . '}";';
+            // link hover bg
+        $html .= 'css.innerHTML += ".article .related-posts a:hover { background: '.
+            addon_get_setting('relatedposts', 'linkhoverbgcolor') . '}";';
+            // left squares
+        $html .= 'css.innerHTML += ".article .related-posts a::before { background: '.
+            addon_get_setting('relatedposts', 'squares') . '}";';
+        $html .= 'css.innerHTML += ".article .related-posts a:hover::after { border-left-color: '.
+            addon_get_setting('relatedposts', 'squares') . '}";';
+        $html .= 'document.head.appendChild(css);';
+        $html .= '</script>';
+    }
 
     return $html;
 }
