@@ -11,7 +11,7 @@
 
 - Take a look to [this repository](https://github.com/BlogoText/blogotext-addons-example), you will find an example, some documentations ...
 - Fork this repo and create a branch for each of your addon (1 addon = 1 branch).
-- The master branch is for working and approuved addons
+- The master branch is for working and approved addons
 - The dev branch is when you need some review or help by the community.
 
 ## Update an addon
