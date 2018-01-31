@@ -81,7 +81,7 @@ function a_contact()
 
     // Some translations
     $msgs = array(
-        'object' => 'New contact from your blog' . $GLOBALS['nom_du_site'] . '.',
+        'object' => 'New contact from your blog ' . $GLOBALS['nom_du_site'] . '.',
         'error_mail' => 'Please enter your mail address.',
         'error_message' => 'Please write something.',
         'error' => 'An error occured ☹',
@@ -89,7 +89,7 @@ function a_contact()
     );
     if ($GLOBALS['lang']['id'] == "fr") {
         $msgs = array(
-            'object' => 'Nouveau message depuis votre blog' . $GLOBALS['nom_du_site'] . '.',
+            'object' => 'Nouveau message depuis votre blog ' . $GLOBALS['nom_du_site'] . '.',
             'error_mail' => 'Entrez une adresse courriel valide svp',
             'error_message' => 'Écriver un message svp',
             'error' => 'Une erreur est survenue ☹',
