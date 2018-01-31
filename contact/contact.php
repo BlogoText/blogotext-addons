@@ -58,4 +58,3 @@ function a_contact()
 
     return $html;
 }
-
