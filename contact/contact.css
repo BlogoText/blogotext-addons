@@ -1,0 +1,18 @@
+#contact_form_addon {
+    padding:15px;
+    display:none;
+}
+
+#contact_addon_button {
+    display: block;
+    background: #2196F3;
+    color: white;
+    padding: 15px;
+    margin:5px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.contact_center {
+	text-align:center;
+}
