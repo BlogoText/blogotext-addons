@@ -84,6 +84,7 @@ function a_contact()
         'object' => 'New contact from your blog ' . $GLOBALS['nom_du_site'] . '.',
         'error_mail' => 'Please enter your mail address.',
         'error_message' => 'Please write something.',
+        'error_captcha' => 'Please check captcha',
         'error' => 'An error occured ☹',
         'success' => 'Your message has been send ☺',
     );
@@ -92,6 +93,7 @@ function a_contact()
             'object' => 'Nouveau message depuis votre blog ' . $GLOBALS['nom_du_site'] . '.',
             'error_mail' => 'Entrez une adresse courriel valide svp',
             'error_message' => 'Écriver un message svp',
+            'error_captcha' => 'Erreur de calcul?',
             'error' => 'Une erreur est survenue ☹',
             'success' => 'Votre message a bien été envoyé ☺',
         );
@@ -105,6 +107,8 @@ function a_contact()
         // get datas
         $datas['from'] = filter_input(INPUT_POST, 'a_contact_from', FILTER_SANITIZE_SPECIAL_CHARS);
         $datas['message'] = filter_input(INPUT_POST, 'a_contact_message', FILTER_SANITIZE_SPECIAL_CHARS);
+        $datas['captcha'] = filter_input(INPUT_POST, 'a_contact_captcha', FILTER_SANITIZE_SPECIAL_CHARS);
+        $datas['token'] = filter_input(INPUT_POST, 'a_contact_token', FILTER_SANITIZE_SPECIAL_CHARS);
 
         // check datas
         if (!IsEmail($datas['from'])) {
@@ -114,6 +118,16 @@ function a_contact()
         if (empty($datas['message'])) {
             $errors['message'] = $msgs['error_message'];
             $form_proceed = 'error';
+        }
+        if (empty($datas['captcha']) || empty($datas['token'])) {
+            $errors['captcha'] = $msgs['error_captcha'];
+            $form_proceed = 'error';
+        } else {
+            $ua = (isset($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+            if ($datas['token'] != sha1($ua.$datas['captcha'])) {
+                $errors['captcha'] = $msgs['error_captcha'];
+                $form_proceed = 'error';
+            }
         }
     
         // send email if no error
@@ -135,7 +149,6 @@ function a_contact()
     }
     // display form
     $html = '<div id="contact_addon">';
-    $html .= '<h3>'.addon_get_setting('contact', 'title').'</h3>';
 
     // if succeed
     if ($form_proceed == 'tosend') {
@@ -162,10 +175,13 @@ function a_contact()
         $html .= '<div id="contact_form_addon" class="contact_hidden">';
     }
 
-    //$html .= '<form id="a_contact" method="POST">';
+    $html .= '<h3>'.addon_get_setting('contact', 'title').'</h3>';
     $html .= '<form id="contact" method="POST" action="'.URL_ROOT.'/index.php">';
     $html .= '<p><label for="a_contact_message">Message :</label><textarea name="a_contact_message" cols="10" rows="5"></textarea></p>';
     $html .= '<p><label for="email">Email : </label><input required type="email" name="a_contact_from" /></p>';
+    $html .= '<p><label>'.$GLOBALS['lang']['label_dp_captcha'].'<b>'.en_lettres($GLOBALS['captcha']['x']).'</b> &#x0002B; <b>'.en_lettres($GLOBALS['captcha']['y']).'</b>';
+    $html .= '<input type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int"/></label></p>';
+    $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
     $html .= '<div class="contact_center" ><input type="submit" name="contact_envoi" value="Envoyer ✓" /></div>';
     $html .= '</form>';
     $html .= '</div>';
