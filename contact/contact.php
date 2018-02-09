@@ -4,6 +4,14 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
+
+/**
+ * Change log
+ *
+ * 1.0.2 2018-02-09 @remrem
+ *  - add @ on mail()
+ */
+
 $declaration = array(
     // the tag of your addon (required)
     'tag' => 'contact',
@@ -22,7 +30,7 @@ $declaration = array(
 
     'url' => 'https://yeuxdelibad.net',
     // the version, showed in admin/addon (required)
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'compliancy' => '3.7',
     'css' => 'contact.css',
     'js' => 'contact.js',
@@ -141,7 +149,7 @@ function a_contact()
                     'Content-Disposition: inline'. "\r\n" .
                     'Content-Transfer-Encoding: 7bit'." \r\n" .
                     'X-Mailer:PHP/'.phpversion();
-            $ok = mail($destinataire, $msgs['object'], $datas['message'], $headers);
+            $ok = @mail($destinataire, $msgs['object'], $datas['message'], $headers);
             if (!$ok) {
                 $form_proceed = 'error';
             }
