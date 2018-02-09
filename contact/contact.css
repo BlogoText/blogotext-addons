@@ -1,0 +1,22 @@
+#contact_addon{padding:15px;}
+#contact_addon_content{margin:10px;}
+#a_contact{margin:5px;}
+#contact_addon_button {
+    display: block;
+    background: #2196F3;
+    color: white;
+    padding: 10px;
+    width:225px;
+    margin:auto;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bolder;
+    border: none;
+    text-decoration: none;
+}
+
+.contact_center {text-align:center;}
+.contact_visible {display:block;}
+.contact_hidden {display:none;}
+.contact_error {border: 1px solid red; text-align:center; padding:3px}
+.contact_success {color:green;}
