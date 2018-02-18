@@ -87,7 +87,7 @@ $declaration = array(
 /**
  * used by hook
  * Transform article content on the main blog page (and aside page ?p=)
- *   to reduce the content to show and put a link to read the article 
+ *   to reduce the content to show and put a link to read the article
  *   on the dedicated page of the article
  *
  * @params array $datas, from the hook
