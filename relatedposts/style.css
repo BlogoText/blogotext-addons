@@ -1,16 +1,12 @@
 /* http://red-team-design.com/css3-ordered-list-styles/ */
 .article .related-posts {
-    background-color: #eee;
+    background-color: transparent;
     border-top: 1px solid #ddd;
     padding: 1em;
 }
 
 .article .related-posts p {
     font-weight: 700;
-}
-
-.article .related-posts .category {
-    color: #2196f3;
 }
 
 .article .related-posts ul {
@@ -62,4 +58,46 @@
 .article .related-posts a:hover::after {
     left: -.5em;
     border-left-color: #fa8072;
+}
+
+#readmore {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#readmore > li {
+    width: 25%;
+    height: 175px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    background-size: cover;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+    font-size: 1.2em;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+#readmore li > a {
+    transition: all .5s ease-out;
+    background: rgba(0, 0, 0, .6);
+    padding: 5px;
+    text-overflow: ellipsis;
+    min-height: 35%;
+    width: 100%;
+}
+#readmore li > a:hover {
+    transition: all .5s ease-out;
+    transform:translateY(-5px);
+    transform:scale(1.1,1.1);
+}
+
+@media (max-width: 700px) {
+    #readmore > li {
+        width: 50%;
+    }
 }
