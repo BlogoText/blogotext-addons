@@ -176,7 +176,7 @@ function a_contact()
     }
 
     $html .= '<h3>'.addon_get_setting('contact', 'title').'</h3>';
-    $html .= '<form id="contact" method="POST" action="'.URL_ROOT.'/index.php">';
+    $html .= '<form id="contact" method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
     $html .= '<p><label for="a_contact_message">Message :</label><textarea name="a_contact_message" cols="10" rows="5"></textarea></p>';
     $html .= '<p><label for="email">Email : </label><input required type="email" name="a_contact_from" /></p>';
     $html .= '<p><label>'.$GLOBALS['lang']['label_dp_captcha'].'<b>'.en_lettres($GLOBALS['captcha']['x']).'</b> &#x0002B; <b>'.en_lettres($GLOBALS['captcha']['y']).'</b>';
