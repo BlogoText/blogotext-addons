@@ -87,6 +87,7 @@ function a_contact()
         'error_captcha' => 'Please check captcha',
         'error' => 'An error occured ☹',
         'success' => 'Your message has been send ☺',
+        'send' => 'Send ✓',
     );
     if ($GLOBALS['lang']['id'] == "fr") {
         $msgs = array(
@@ -96,6 +97,7 @@ function a_contact()
             'error_captcha' => 'Erreur de calcul?',
             'error' => 'Une erreur est survenue ☹',
             'success' => 'Votre message a bien été envoyé ☺',
+            'send' => 'Envoyer ✓',
         );
     }
 
@@ -182,7 +184,7 @@ function a_contact()
     $html .= '<p><label>'.$GLOBALS['lang']['label_dp_captcha'].'<b>'.en_lettres($GLOBALS['captcha']['x']).'</b> &#x0002B; <b>'.en_lettres($GLOBALS['captcha']['y']).'</b>';
     $html .= '<input type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int"/></label></p>';
     $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
-    $html .= '<div class="contact_center" ><input type="submit" name="contact_envoi" value="Envoyer ✓" /></div>';
+    $html .= '<div class="contact_center" ><input type="submit" name="contact_envoi" value="'.$msgs['send'].'" /></div>';
     $html .= '</form>';
     $html .= '</div>';
 
