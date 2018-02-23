@@ -22,7 +22,7 @@ $declaration = array(
 
     'url' => 'https://yeuxdelibad.net',
     // the version, showed in admin/addon (required)
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'compliancy' => '3.7',
     'css' => 'contact.css',
     'js' => 'contact.js',
