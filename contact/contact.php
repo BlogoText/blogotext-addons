@@ -4,7 +4,6 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
-
 /**
  * Change log
  *
@@ -95,6 +94,7 @@ function a_contact()
         'error_captcha' => 'Please check captcha',
         'error' => 'An error occured ☹',
         'success' => 'Your message has been send ☺',
+        'send' => 'Send ✓',
     );
     if ($GLOBALS['lang']['id'] == "fr") {
         $msgs = array(
@@ -104,6 +104,7 @@ function a_contact()
             'error_captcha' => 'Erreur de calcul?',
             'error' => 'Une erreur est survenue ☹',
             'success' => 'Votre message a bien été envoyé ☺',
+            'send' => 'Envoyer ✓',
         );
     }
 
@@ -149,6 +150,7 @@ function a_contact()
                     'Content-Disposition: inline'. "\r\n" .
                     'Content-Transfer-Encoding: 7bit'." \r\n" .
                     'X-Mailer:PHP/'.phpversion();
+
             $ok = @mail($destinataire, $msgs['object'], $datas['message'], $headers);
             if (!$ok) {
                 $form_proceed = 'error';
@@ -184,13 +186,13 @@ function a_contact()
     }
 
     $html .= '<h3>'.addon_get_setting('contact', 'title').'</h3>';
-    $html .= '<form id="contact" method="POST" action="'.URL_ROOT.'/index.php">';
+    $html .= '<form id="contact" method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
     $html .= '<p><label for="a_contact_message">Message :</label><textarea name="a_contact_message" cols="10" rows="5"></textarea></p>';
     $html .= '<p><label for="email">Email : </label><input required type="email" name="a_contact_from" /></p>';
     $html .= '<p><label>'.$GLOBALS['lang']['label_dp_captcha'].'<b>'.en_lettres($GLOBALS['captcha']['x']).'</b> &#x0002B; <b>'.en_lettres($GLOBALS['captcha']['y']).'</b>';
     $html .= '<input type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int"/></label></p>';
     $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
-    $html .= '<div class="contact_center" ><input type="submit" name="contact_envoi" value="Envoyer ✓" /></div>';
+    $html .= '<div class="contact_center" ><input type="submit" name="contact_envoi" value="'.$msgs['send'].'" /></div>';
     $html .= '</form>';
     $html .= '</div>';
 
