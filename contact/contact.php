@@ -4,6 +4,13 @@
 # You can redistribute it under the terms of the MIT / X11 Licence.
 # *** LICENSE ***
 
+/**
+ * Change log
+ *
+ * 1.0.2 2018-02-09 @remrem
+ *  - add @ on mail()
+ */
+
 $declaration = array(
     // the tag of your addon (required)
     'tag' => 'contact',
@@ -143,7 +150,8 @@ function a_contact()
                     'Content-Disposition: inline'. "\r\n" .
                     'Content-Transfer-Encoding: 7bit'." \r\n" .
                     'X-Mailer:PHP/'.phpversion();
-            $ok = mail($destinataire, $msgs['object'], $datas['message'], $headers);
+
+            $ok = @mail($destinataire, $msgs['object'], $datas['message'], $headers);
             if (!$ok) {
                 $form_proceed = 'error';
             }
