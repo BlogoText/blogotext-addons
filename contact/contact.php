@@ -7,6 +7,10 @@
 /**
  * Change log
  *
+ * 1.0.3 2018-02-26 @B4rb3rouss
+ *  - fix missing tanslation
+ *  - fix form action
+ *
  * 1.0.2 2018-02-09 @remrem
  *  - add @ on mail()
  */
@@ -29,7 +33,7 @@ $declaration = array(
 
     'url' => 'https://yeuxdelibad.net',
     // the version, showed in admin/addon (required)
-    'version' => '1.0.1',
+    'version' => '1.0.3',
     'compliancy' => '3.7',
     'css' => 'contact.css',
     'js' => 'contact.js',
