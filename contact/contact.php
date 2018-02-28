@@ -7,6 +7,9 @@
 /**
  * Change log
  *
+ * 1.0.4 2018-02-28 @B4rb3rouss
+ *  - add some css class followin @remrem suggestions
+ *
  * 1.0.3 2018-02-26 @B4rb3rouss
  *  - fix missing tanslation
  *  - fix form action
@@ -33,7 +36,7 @@ $declaration = array(
 
     'url' => 'https://yeuxdelibad.net',
     // the version, showed in admin/addon (required)
-    'version' => '1.0.3',
+    'version' => '1.0.4',
     'compliancy' => '3.7',
     'css' => 'contact.css',
     'js' => 'contact.js',
