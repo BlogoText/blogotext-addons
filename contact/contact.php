@@ -175,10 +175,10 @@ function a_contact()
     // error
     if ($form_proceed == 'error') {
         $html .= '<div id="contact_addon_content" class="contact_error">';
-        $html .= '<h3>'.$msgs['error'].'</h3>';
+        $html .= '<div>'.$msgs['error'].'</div>';
         foreach ($errors as $e) {
             if (!empty($e)) {
-                $html .= '<p>'.$e.'</p>';
+                $html .= '<div>'.$e.'</div>';
             }
         }
         $html .= '</div>';
@@ -189,14 +189,20 @@ function a_contact()
         $html .= '<div id="contact_form_addon" class="contact_hidden">';
     }
 
-    $html .= '<h3>'.addon_get_setting('contact', 'title').'</h3>';
+    $html .= '<div class="contact_title">'.addon_get_setting('contact', 'title').'</div>';
     $html .= '<form id="contact" method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
-    $html .= '<p><label for="a_contact_message">Message :</label><textarea name="a_contact_message" cols="10" rows="5"></textarea></p>';
-    $html .= '<p><label for="email">Email : </label><input required type="email" name="a_contact_from" /></p>';
-    $html .= '<p><label>'.$GLOBALS['lang']['label_dp_captcha'].'<b>'.en_lettres($GLOBALS['captcha']['x']).'</b> &#x0002B; <b>'.en_lettres($GLOBALS['captcha']['y']).'</b>';
-    $html .= '<input type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int"/></label></p>';
+    $html .= '<div class="contact_content">';
+    $html .= '<label for="a_contact_message">Message :</label><textarea name="a_contact_message" cols="10" rows="5"></textarea>';
+    $html .= '</div>';
+    $html .= '<div class="contact_email">';
+    $html .= '<label for="email">Email : </label><input required type="email" name="a_contact_from" />';
+    $html .= '</div>';
+    $html .= '<div class="contact_captcha">';
+    $html .= '<label>'.$GLOBALS['lang']['label_dp_captcha'].$GLOBALS['captcha']['x'].' &#x0002B; '.en_lettres($GLOBALS['captcha']['y']).' = ';
+    $html .= '<input type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int"/></label>';
+    $html .= '</div>';
     $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
-    $html .= '<div class="contact_center" ><input type="submit" name="contact_envoi" value="'.$msgs['send'].'" /></div>';
+    $html .= '<div class="contact_submit" ><input type="submit" name="contact_envoi" value="'.$msgs['send'].'" /></div>';
     $html .= '</form>';
     $html .= '</div>';
 
