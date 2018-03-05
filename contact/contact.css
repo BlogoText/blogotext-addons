@@ -1,64 +1,82 @@
-#contact_addon{padding:15px;text-align:left;width:50%;margin:auto;}
-#contact_addon_content{margin:10px}
-#a_contact{margin:5px}
-#contact_addon_button {
+.contact_addon {
+    padding: 15px;
+    text-align: left;
+    max-width: 640px;
+    margin: auto;
+}
+
+.contact_form {
+    display: block;
+}
+.contact_form.contact_hidden
+{
+    display: none;
+}
+
+.contact_error {
+    border: 1px solid red;
+    text-align: center;
+    padding: 3px;
+}
+.contact_success {
+    color: green;
+}
+
+.contact_title {
+    font-size: 1.3em;
+    font-weight:bolder;
+}
+
+/* all labels */
+.contact_form label {
+    margin-right: 10px;
+}
+/*all parts */
+.contact_form .contact_content,
+.contact_form .contact_email,
+.contact_form .contact_captcha {
+    margin-top: 10px;
+}
+/* all input (- submit)+ textarea */
+.contact_form .contact_content input,
+.contact_form .contact_email input,
+.contact_form .contact_captcha input,
+.contact_form textarea {
+    width: 100%;
+}
+
+/* per input conf */
+.contact_form .contact_captcha input {
+    width: 4ch;
+    max-width: 100px;
+}
+
+
+/* buttons */
+
+/* button show/hide form and submit */
+.contact_form .contact_submit input,
+.contact_addon_button button{
     display: block;
     background: #2196F3;
     color: white;
     padding: 10px;
-    width:225px;
-    margin:auto;
+    width: 100%;
+    max-width: 225px;
+    margin: auto;
     text-align: center;
     border-radius: 5px;
     font-weight: bolder;
-    border: none;
+    border: 0;
     text-decoration: none;
+    box-shadow: 1px 1px 2px rgba(100, 100, 100, 0.1);
 }
 
-#contact_addon .contact_visible {display:block}
-#contact_addon .contact_hidden {display:none}
-#contact_addon .contact_error {border: 1px solid red; text-align:center; padding:3px}
-#contact_addon .contact_success {color:green}
-
-#contact_form_addon .contact_title {font-size:1.3em; font-weight:bolder}
-/* all labels */
-#contact_form_addon label { margin-right:10px;}
-/*all parts */
-#contact_form_addon .contact_content,
-#contact_form_addon .contact_email,
-#contact_form_addon .contact_captcha {margin-top:10px}
-/* all input (- submit)+ textarea */
-#contact_form_addon .contact_content input,
-#contact_form_addon .contact_email input,
-#contact_form_addon .contact_captcha input,
-#contact_form_addon textarea {
-    padding-left:10px;
-    vertical-align:center;
+.contact_form .contact_submit {
+    text-align: center;
+    margin: 20px auto;
 }
-/* submit button */
-#contact_form_addon .contact_submit  {
-    text-align:center;
-    width:150px;
-    margin:20px auto;
+.contact_form .contact_submit input:hover,
+.contact_addon_button button:hover {
+    box-shadow: 1px 1px 2px rgba(100, 100, 100,0.5);
 }
-#contact_form_addon .contact_submit input {
-    font-weight:bolder;
-    font-size:1.1em;
-    height: 24px;
-    border-radius:5px;
-    background-color:transparent;
-    border:1px solid silver;
-}
-#contact_form_addon .contact_submit input:hover {
-    box-shadow: 1px 1px 2px rgba(100,100,100,0.5);
-}
-
-/* per input conf */
-#contact_form_addon .contact_content input {
-    width:80ch;
-    border: solid 1px rgba(0,0,0,0.6);
-}
-#contact_form_addon .contact_email input {width:30ch;border:0;}
-#contact_form_addon .contact_captcha input {width:4ch;border:0;}
-/* target one specific label */
-#contact_form_addon .contact_email label {}
