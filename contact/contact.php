@@ -10,7 +10,6 @@
  * 1.0.5 2018-03-02 @remrem
  *  - some tiny fix for css, html and JS
  *  - remove all uniq HTML id, use class, allowing multiple insertion in template
- *  -
  *
  * 1.0.4 2018-02-28 @B4rb3rouss
  *  - add some css class followin @remrem suggestions
@@ -41,7 +40,7 @@ $declaration = array(
 
     'url' => 'https://yeuxdelibad.net',
     // the version, showed in admin/addon (required)
-    'version' => '1.0.4',
+    'version' => '1.0.5',
     'compliancy' => '3.7',
     'css' => 'contact.css',
     'js' => 'contact.js',
