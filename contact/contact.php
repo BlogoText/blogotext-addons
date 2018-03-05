@@ -7,6 +7,11 @@
 /**
  * Change log
  *
+ * 1.0.5 2018-03-02 @remrem
+ *  - some tiny fix for css, html and JS
+ *  - remove all uniq HTML id, use class, allowing multiple insertion in template
+ *  -
+ *
  * 1.0.4 2018-02-28 @B4rb3rouss
  *  - add some css class followin @remrem suggestions
  *
@@ -55,17 +60,19 @@ $declaration = array(
                 'en' => 'title over the form',
                 'fr' => 'Titre au dessus du formulaire.'
             ),
-            'value' => 'Message à l\'auteur : ',
+            'value' => 'Message à l\'auteur',
         ),
-
     ),
 );
 
 
 
-/*
-* Cette fonction sert à vérifier la syntaxe d'un email
-*/
+/**
+ * Cette fonction sert à vérifier la syntaxe d'un email
+ *
+ * @params $email string
+ * @return bool
+ */
 function IsEmail($email)
 {
     $value = preg_match('/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!\.)){0,61}[a-zA-Z0-9_-]?\.)+[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!$)){0,61}[a-zA-Z0-9_]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/', $email);
@@ -78,6 +85,8 @@ function a_contact()
     // form status
     // 'empty', 'tosend', 'error'
     $form_proceed = 'empty';
+    // random ids for html
+    $random_ids = mt_rand(3, 5);
 
     // les données par défault
     $datas = array(
@@ -119,7 +128,7 @@ function a_contact()
         // let's believe it's ok
         $form_proceed = 'tosend';
         $destinataire = $GLOBALS['email'];
-        
+
         // get datas
         $datas['from'] = filter_input(INPUT_POST, 'a_contact_from', FILTER_SANITIZE_SPECIAL_CHARS);
         $datas['message'] = filter_input(INPUT_POST, 'a_contact_message', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -145,11 +154,11 @@ function a_contact()
                 $form_proceed = 'error';
             }
         }
-    
+
         // send email if no error
         if ($form_proceed == 'tosend') {
             $datas['message'] = htmlspecialchars_decode($datas['message'], ENT_NOQUOTES);
-    
+
             $headers  = 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'From: <'.$datas['from'].'>' . "\r\n" .
                     'Reply-To:'.$datas['from']. "\r\n" .
@@ -164,20 +173,23 @@ function a_contact()
             }
         }
     }
+
     // display form
-    $html = '<div id="contact_addon">';
+    $html = '<div class="contact_addon">';
 
     // if succeed
     if ($form_proceed == 'tosend') {
-        $html .= '<div id="contact_addon_content" class="contact_success">';
+        $html .= '<div class="contact_success">';
         $html .= $msgs['success'];
-        $html .= '</div></div>';
+        $html .= '</div>';
+        // end here HTML
+        $html .= '</div>';
         return $html;
     }
 
     // error
     if ($form_proceed == 'error') {
-        $html .= '<div id="contact_addon_content" class="contact_error">';
+        $html .= '<div class="contact_error">';
         $html .= '<div>'.$msgs['error'].'</div>';
         foreach ($errors as $e) {
             if (!empty($e)) {
@@ -185,35 +197,42 @@ function a_contact()
             }
         }
         $html .= '</div>';
-        $html .= '<div id="contact_form_addon" class="contact_visible">';
+        $html .= '<div class="contact_form">';
     }
 
     if ($form_proceed == 'empty') {
-        $html .= '<div id="contact_form_addon" class="contact_hidden">';
+        $html .= '<div class="contact_form contact_hidden">';
     }
 
     $html .= '<div class="contact_title">'.addon_get_setting('contact', 'title').'</div>';
-    $html .= '<form id="contact" method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
-    $html .= '<div class="contact_content">';
-    $html .= '<label for="a_contact_message">Message :</label><textarea name="a_contact_message" cols="10" rows="5"></textarea>';
-    $html .= '</div>';
-    $html .= '<div class="contact_email">';
-    $html .= '<label for="email">Email : </label><input required type="email" name="a_contact_from" />';
-    $html .= '</div>';
-    $html .= '<div class="contact_captcha">';
-    $html .= '<label>'.$GLOBALS['lang']['label_dp_captcha'].$GLOBALS['captcha']['x'].' &#x0002B; '.en_lettres($GLOBALS['captcha']['y']).' = ';
-    $html .= '<input type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int"/></label>';
-    $html .= '</div>';
-    $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
-    $html .= '<div class="contact_submit" ><input type="submit" name="contact_envoi" value="'.$msgs['send'].'" /></div>';
+    $html .= '<form method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
+        $html .= '<div class="contact_content">';
+            $html .= '<label for="a_contact_message-'.$random_ids.'">Message :</label>';
+            $html .= '<textarea id="a_contact_message-'.$random_ids.'" name="contact_message" cols="10" rows="5"></textarea>';
+        $html .= '</div>';
+        $html .= '<div class="contact_email">';
+            $html .= '<label for="a_contact_email-'.$random_ids.'">Email : </label>';
+            $html .= '<input id="a_contact_email-'.$random_ids.'" required type="email" name="a_contact_from" />';
+        $html .= '</div>';
+        $html .= '<div class="contact_captcha">';
+            $html .= '<label for="a_contact_captcha-'.$random_ids.'">'.$GLOBALS['lang']['label_dp_captcha'].$GLOBALS['captcha']['x'].' &#x0002B; '.en_lettres($GLOBALS['captcha']['y']).' = ';
+            $html .= '<input id="a_contact_captcha-'.$random_ids.'" type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int" /></label>';
+        $html .= '</div>';
+        $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
+        $html .= '<div class="contact_submit">';
+            $html .= '<input type="submit" name="contact_envoi" value="'.$msgs['send'].'" />';
+        $html .= '</div>';
     $html .= '</form>';
     $html .= '</div>';
 
     if ($form_proceed == 'empty') {
-        $html .= '<button id="contact_addon_button" type="button" onclick="javascript:showhide(\'contact_form_addon\')">';
-        $html .= addon_get_setting('contact', 'label');
-        $html .= '</button>';
+        $html .= '<div class="contact_addon_button">';
+            $html .= '<button type="button" onclick="a_contact_showhide()">';
+            $html .= addon_get_setting('contact', 'label');
+            $html .= '</button>';
+        $html .= '<div>';
     }
+    $html .= '</div>';
     $html .= '</div>';
 
     return $html;
