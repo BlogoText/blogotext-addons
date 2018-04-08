@@ -215,7 +215,7 @@ function a_contact()
         $html .= '</div>';
         $html .= '<div class="contact_captcha">';
             $html .= '<label for="a_contact_captcha-'.$random_ids.'">'.$GLOBALS['lang']['label_dp_captcha'].$GLOBALS['captcha']['x'].' &#x0002B; '.en_lettres($GLOBALS['captcha']['y']).' = ';
-            $html .= '<input id="a_contact_captcha-'.$random_ids.'" type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" type="int" /></label>';
+            $html .= '<input id="a_contact_captcha-'.$random_ids.'" type="number" name="a_contact_captcha" autocomplete="off" value="" class="text" /></label>';
         $html .= '</div>';
         $html .= hidden_input('a_contact_token', $GLOBALS['captcha']['hash']);
         $html .= '<div class="contact_submit">';
