@@ -7,6 +7,9 @@
 /**
  * Change log
  *
+ * 1.0.6 2018-04-08 @B4rb3rouss
+ *  - remove an input attribute (not valid and double)
+ *
  * 1.0.5 2018-03-02 @remrem
  *  - some tiny fix for css, html and JS
  *  - remove all uniq HTML id, use class, allowing multiple insertion in template
@@ -40,7 +43,7 @@ $declaration = array(
 
     'url' => 'https://yeuxdelibad.net',
     // the version, showed in admin/addon (required)
-    'version' => '1.0.5',
+    'version' => '1.0.6',
     'compliancy' => '3.7',
     'css' => 'contact.css',
     'js' => 'contact.js',
